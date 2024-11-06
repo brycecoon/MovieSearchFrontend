@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: movie-search
-  namespace: bryceFinal
+  namespace: bryce-final
 spec:
   replicas: 1
   selector:
