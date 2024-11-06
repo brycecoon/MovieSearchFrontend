@@ -1,0 +1,35 @@
+name: Build and deploy on kubernetes
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: [self-hosted]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log into Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Build image
+        run: |
+          docker build -t brycecoon/msearch:${{ github.run_number }} .
+
+      - name: Push image
+        run: |
+          docker push brycecoon/msearch:${{ github.run_number }}
+
+      - name: Deploy to Kubernetes
+        run: |
+          export PATH=$PATH:~/.nix-profile/bin:/nix/var/nix/profiles/default/bin
+
+          export IMAGE_TAG=${{ github.run_number }}
+
+          for file in kube/*; do 
+              cat "$file" | envsubst | kubectl apply -f -; 
+          done
