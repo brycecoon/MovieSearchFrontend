@@ -8,7 +8,7 @@ interface NavItemProps {
 
 const NavItem: React.FC<NavItemProps> = ({ to, icon, text }) => (
   <Link to={to}>
-    <div className="nav-item">
+    <div className="nav-item flex flex-row">
       <i className={`bi ${icon} mr-2`}></i>
       <div className="nav-text">{text}</div>
     </div>

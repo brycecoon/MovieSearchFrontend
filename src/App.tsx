@@ -1,34 +1,44 @@
-import { useEffect } from 'react'
-import './App.css'
-import LoginButton from './AuthStuff/LoginButton'
-import { useAuth } from 'react-oidc-context';
-import { callAuthEndpoint } from './AuthStuff/services/UserService';
-import { Route, Routes } from 'react-router-dom';
-import Home from './Pages/Home';
-import AllMovies from './Pages/AllMovies';
-import Navbar from './Components/Layout/Navbar';
+import { useEffect } from "react";
+import { useAuth } from "react-oidc-context";
+import { callAuthEndpoint } from "./AuthStuff/services/UserService";
+import { Route, Routes } from "react-router-dom";
+import Home from "./Pages/Home";
+import AllMovies from "./Pages/AllMovies";
+import Navbar from "./Components/Layout/Navbar";
+import AdminPage from "./Pages/AdminPage";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import PageNotFound from "./Pages/404Page/PageNotFound";
+
+const queryClient = new QueryClient();
 
 function App() {
   const auth = useAuth();
   useEffect(() => {
     if (auth.user?.id_token) {
-      callAuthEndpoint(auth.user?.id_token)
+      callAuthEndpoint(auth.user?.id_token);
     }
-  }, [auth.user?.id_token])
+  }, [auth.user?.id_token]);
 
   return (
     <>
-    <h1 className="bg-green-500">Hello</h1>
-      {/* <LoginButton/> */}
-      <Navbar/>
-
+      <Navbar />
 
       <Routes>
-        <Route path="/" element={<Home/>}></Route>
-        <Route path="/allmovies" element={<AllMovies/>}></Route>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/allmovies" element={<AllMovies />}></Route>
+        <Route
+          path="/adminpage"
+          element={
+            <QueryClientProvider client={queryClient}>
+              <AdminPage />
+            </QueryClientProvider>
+          }
+        ></Route>
+        <Route path="/*" element={<PageNotFound />}></Route>
       </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

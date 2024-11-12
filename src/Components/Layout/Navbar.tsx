@@ -5,14 +5,15 @@ import LoginButton from "../../AuthStuff/LoginButton";
 const Navbar = () => {
   return (
     <>
-      <div className="bg-black">
-        <div className="myNav p-4 d-none d-md-flex bg-info">
-          {" "}
+      <div className="bg-blue-200 p-4 flex items-center justify-between shadow-md w-screen">
+        <div className="flex space-x-4">
           <NavItem to="/" icon="bi-house-door" text="Home" />
           <NavItem to="/allMovies" icon="bi-film" text="All Movies" />
-          <div className="fixed bottom-4 right-4">
-            <LoginButton />
-          </div>
+          <NavItem to="/adminpage" icon="bi-person-badge" text="Admin" />
+        </div>
+
+        <div>
+          <LoginButton />
         </div>
       </div>
     </>
