@@ -9,7 +9,7 @@ const oidcConfig: AuthProviderProps = {
   client_id: "bryce-oAuth2",
   redirect_uri: "http://localhost:5173/",
   onSigninCallback: (user) => {
-    console.log("signin callback");
+    console.log(user);
     const url =
       window.location.protocol +
       "//" +
