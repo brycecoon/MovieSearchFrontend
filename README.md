@@ -40,12 +40,12 @@ New things I'll have to do
  - 0/10 Authorized Pages and Public Pages
 
 #### Projected New Done Rubric Items:
- - Typescript is in project
+ - Typescript is in project [X]
 
 #### Projected Features Completed:
- - Frontend Project Created
- - Backend Project Created
- - Database Designed and Created
+ - Frontend Project Created [X]
+ - Backend Project Created [X]
+ - Database Designed and Created [X]
 
 # Nov 9
 #### Projected Rubric Evaluation:
@@ -64,17 +64,16 @@ New things I'll have to do
  - 10/10 Authorized Pages and Public Pages
 
 #### Projected New Done Rubric Items:
- - One Page Created
- - CI/CD pipeline with linting
- - Authorized pages and public pages
- - NetWork Calls for read/write
- - Automated Testing
+ - One Page Created []
+ - CI/CD pipeline with linting []
+ - Authorized pages and public pages []
+ - NetWork Calls for read/write []
+ - Automated Testing []
 
 #### Projected Features Completed:
- - Frontend and Backend on Kubernetes
- - Authentication Done
- - Authorization Done where you see some type of data depending on who you are 
- - Landing Page that shows a Carousel of Random Movies
+ - Frontend and Backend on Kubernetes []
+ - Authentication Done []
+ - Landing Page that shows a Carousel of Random Movies []
 
 # Nov 13
 #### Projected Rubric Evaluation:
@@ -93,12 +92,12 @@ New things I'll have to do
  - 10/10 Authorized Pages and Public Pages
 
 #### Projected New Done Rubric Items:
- - one new page
- - reusable card component for Movie
- - Context for movies
+ - one new page []
+ - reusable card component for Movie []
+ - Context for movies []
 
 #### Projected Features Completed:
- - Search Page (filters)
+ - Search Page (filters) []
 
 
 # Nov 16
@@ -118,11 +117,11 @@ New things I'll have to do
  - 10/10 Authorized Pages and Public Pages
 
 #### Projected New Done Rubric Items:
- - 2 more pages 
+ - 2 more pages  []
 
 #### Projected Features Completed:
- - Movies in Theatres
- - Single Movie Detail Page
+ - Movies in Theatres []
+ - Single Movie Detail Page []
 
 
 # Nov 20
@@ -142,11 +141,11 @@ New things I'll have to do
  - 10/10 Authorized Pages and Public Pages
 
 #### Projected New Done Rubric Items:
- - One more page
- - Reusable layout component for a list
+ - One more page []
+ - Reusable layout component for a list []
 
 #### Projected Features Completed:
- - Lists Page
+ - Lists Page []
 
 # Nov 23
 #### Projected Rubric Evaluation:
@@ -165,13 +164,13 @@ New things I'll have to do
  - 10/10 Authorized Pages and Public Pages
 
 #### Projected New Done Rubric Items:
- - Two more pages
- - Reusable Input, select, and Radio Components
- - Toasts, also resuable layout component
+ - Two more pages []
+ - Reusable Input, select, and Radio Components []
+ - Toasts, also resuable layout component []
 
 #### Projected Features Completed:
- - Voting page, also shows top voted on the landing page
- - Actor/Director Page
+ - Voting page, also shows top voted on the landing page []
+ - Actor/Director Page []
 
 
 # Nov 26
@@ -191,13 +190,13 @@ New things I'll have to do
  - 10/10 Authorized Pages and Public Pages
 
 #### Projected New Done Rubric Items:
- - Use local storage for user information and login stuff
- - Error handling
- - two more pages
+ - Use local storage for user information and login stuff []
+ - Error handling []
+ - two more pages []
 
 #### Projected Features Completed:
- - User Profile Page
- - What should I watch Page
+ - User Profile Page []
+ - What should I watch Page []
 
 # Dec 4
 #### Projected Rubric Evaluation:
@@ -216,8 +215,8 @@ New things I'll have to do
  - 10/10 Authorized Pages and Public Pages
 
 #### Projected New Done Rubric Items:
- - reusable layout component to show facts on the facts page
- - one more page
+ - reusable layout component to show facts on the facts page []
+ - one more page []
 
 #### Projected Features Completed:
  - Movie information and facts page
