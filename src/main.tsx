@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
 import { AuthProvider, AuthProviderProps } from "react-oidc-context";
+import { BrowserRouter } from "react-router-dom";
 
 const oidcConfig: AuthProviderProps = {
   authority: "https://auth.snowse.duckdns.org/realms/advanced-frontend/",
@@ -21,9 +22,11 @@ const oidcConfig: AuthProviderProps = {
 };
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <AuthProvider {...oidcConfig}>
-      <App />
-    </AuthProvider>
-  </StrictMode>
+  <BrowserRouter>
+    <StrictMode>
+      <AuthProvider {...oidcConfig}>
+        <App />
+      </AuthProvider>
+    </StrictMode>
+  </BrowserRouter>
 );

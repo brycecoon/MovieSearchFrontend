@@ -3,6 +3,10 @@ import './App.css'
 import LoginButton from './AuthStuff/LoginButton'
 import { useAuth } from 'react-oidc-context';
 import { callAuthEndpoint } from './AuthStuff/services/UserService';
+import { Route, Routes } from 'react-router-dom';
+import Home from './Pages/Home';
+import AllMovies from './Pages/AllMovies';
+import Navbar from './Components/Layout/Navbar';
 
 function App() {
   const auth = useAuth();
@@ -15,7 +19,14 @@ function App() {
   return (
     <>
     <h1 className="bg-green-500">Hello</h1>
-      <LoginButton/>
+      {/* <LoginButton/> */}
+      <Navbar/>
+
+
+      <Routes>
+        <Route path="/" element={<Home/>}></Route>
+        <Route path="/allmovies" element={<AllMovies/>}></Route>
+      </Routes>
     </>
   )
 }
