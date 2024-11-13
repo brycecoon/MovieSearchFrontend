@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useAllUsers } from "../Functions/Queries/UserHooks";
 import { useAuth } from "react-oidc-context";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +18,7 @@ const AdminPage = () => {
       };
 
       checkAuthorization();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth.user?.id_token]);
 
   const checkIfAuthorized = async (): Promise<boolean> => {

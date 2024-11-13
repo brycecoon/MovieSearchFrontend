@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Movie } from "../Data/Interfaces/Movie";
 const imageBaseUrl = "https://image.tmdb.org/t/p/w300";
 

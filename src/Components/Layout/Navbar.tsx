@@ -1,4 +1,3 @@
-import React from "react";
 import NavItem from "./NavItem";
 import LoginButton from "../../AuthStuff/LoginButton";
 

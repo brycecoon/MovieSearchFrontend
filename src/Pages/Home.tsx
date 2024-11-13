@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useAuth } from "react-oidc-context";
 import { callAuthEndpoint } from "../AuthStuff/services/UserService";
 import { AddUser, getUserByEmail } from "../Functions/UserRequests";
