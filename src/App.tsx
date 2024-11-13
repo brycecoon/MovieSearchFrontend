@@ -7,10 +7,8 @@ import AllMovies from "./Pages/AllMovies";
 import Navbar from "./Components/Layout/Navbar";
 import AdminPage from "./Pages/AdminPage";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import PageNotFound from "./Pages/404Page/PageNotFound";
 
-const queryClient = new QueryClient();
 
 function App() {
   const auth = useAuth();
@@ -30,9 +28,7 @@ function App() {
         <Route
           path="/adminpage"
           element={
-            <QueryClientProvider client={queryClient}>
               <AdminPage />
-            </QueryClientProvider>
           }
         ></Route>
         <Route path="/*" element={<PageNotFound />}></Route>
