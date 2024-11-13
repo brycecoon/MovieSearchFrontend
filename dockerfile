@@ -1,6 +1,6 @@
-FROM node:20 as myApp
+FROM node:20 AS myapp
 
-ENV NODE_ENV development
+ENV NODE_ENV=development
 WORKDIR /moviesearchfrontend
 COPY ./package.json /moviesearchfrontend
 RUN npm install
@@ -13,4 +13,4 @@ WORKDIR /usr/share/nginx/
 RUN rm -rf html
 RUN mkdir html
 
-COPY --from=myApp /moviesearchfrontend/dist /usr/share/nginx/html
+COPY --from=myapp /moviesearchfrontend/dist /usr/share/nginx/html
