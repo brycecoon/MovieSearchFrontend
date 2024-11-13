@@ -35,7 +35,7 @@ const Home = () => {
     <>
       <div>
         {Movies?.map((m) => {
-          return <MovieCard movie={m}/>;
+          return <MovieCard key={m.id} movie={m}/>;
         })}
       </div>
     </>

@@ -21,7 +21,9 @@ jobs:
           docker build -t brycecoon/msearch:${{ github.run_number }} .
 
       - name: Testing
-        run: npm run test
+        run: |
+          npm install
+          npm run test
 
       - name: Push image
         run: |
