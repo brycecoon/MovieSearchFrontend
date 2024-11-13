@@ -21,7 +21,7 @@ jobs:
           docker build -t brycecoon/msearch:${{ github.run_number }} .
 
       - name: Linting
-        run: npm run lint
+        run: npx eslint .
 
       - name: Testing
         run: npm run test

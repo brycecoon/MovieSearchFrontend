@@ -12,6 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     checkIfUserExists();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth.user?.id_token]);
 
   async function checkIfUserExists() {
