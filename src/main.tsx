@@ -9,8 +9,7 @@ const oidcConfig: AuthProviderProps = {
   authority: "https://auth.snowse.duckdns.org/realms/advanced-frontend/",
   client_id: "bryce-oAuth2",
   redirect_uri: "http://localhost:5173/",
-  onSigninCallback: (user) => {
-    console.log(user);
+  onSigninCallback: () => {
     const url =
       window.location.protocol +
       "//" +

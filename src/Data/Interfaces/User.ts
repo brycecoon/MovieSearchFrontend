@@ -3,5 +3,5 @@ export interface User {
     name: string;
     email: string;
     biography: string;
-    roleid: number;
+    roleId: number;
   }

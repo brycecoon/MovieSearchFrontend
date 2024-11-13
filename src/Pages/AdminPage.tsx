@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useAllUsers } from "../Functions/Queries/UserHooks";
 import { useAuth } from "react-oidc-context";
 import { useNavigate } from "react-router-dom";
 import { callAuthEndpoint } from "../AuthStuff/services/UserService";
-import { User } from "../Data/Interfaces/User";
 
 const AdminPage = () => {
   const { data: users } = useAllUsers();
-  const [currUser, setCurrUser] = useState<User>();
-  const [currUserEmail, setCurrUserEmail] = useState<string>();
   const auth = useAuth();
   const navigate = useNavigate();
 
@@ -26,17 +23,13 @@ const AdminPage = () => {
   const checkIfAuthorized = async (): Promise<boolean> => {
     if (auth.user && auth.user.id_token) {
         const data = await callAuthEndpoint(auth.user.id_token);
+        console.log("data: " + data)
+        const loggedInUser = await users?.find((u) => u.email === data);
+        console.log("currUser is", loggedInUser);
 
-        // Find the current user based on the fetched email
-        const currUser = users?.find((u) => u.email === data.email);
-        setCurrUser(currUser);
-        console.log("currUser is", currUser);
-
-        if (currUser && currUser.roleid === 2) {
+        if (loggedInUser && loggedInUser.roleId == 2) {
             return true; 
-        } else {
-            return false; 
-        }
+        } 
     }
     return false;
 };
