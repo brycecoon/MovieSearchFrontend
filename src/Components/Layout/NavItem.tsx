@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 interface NavItemProps {
   to: string;
   icon: string;

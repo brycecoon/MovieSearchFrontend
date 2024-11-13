@@ -18,7 +18,6 @@ const AdminPage = () => {
       };
 
       checkAuthorization();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth.user?.id_token]);
 
   const checkIfAuthorized = async (): Promise<boolean> => {
