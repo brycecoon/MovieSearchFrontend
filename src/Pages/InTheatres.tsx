@@ -1,4 +1,3 @@
-import React from "react";
 import { useAllMoviesNowPlaying } from "../Functions/Queries/MovieHooks";
 import MovieCard from "../Components/MovieCard";
 
