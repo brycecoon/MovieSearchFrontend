@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getMoviesByPage, getMoviesNowPlaying, getTrendingMovies } from "../MovieRequests";
+import { getAllGenres, getMoviesByGenre, getMoviesByPage, getMoviesNowPlaying, getTrendingMovies } from "../MovieRequests";
 
 export const useAllMoviesNowPlaying = () => {
     return useQuery({
@@ -18,8 +18,20 @@ export const useAllMoviesNowPlaying = () => {
   export const useMovieByPage = (pageNum: number) => {
     return useQuery({
       queryKey: ["movieByPage", pageNum],
-      queryFn: () =>
-       { console.log("fetching " + pageNum);
-        return getMoviesByPage(pageNum)},
-    });
+      queryFn: () => getMoviesByPage(pageNum)},
+    );
+  };
+
+  export const useMovieByGenre = (genreId: number, pageNum: number) => {
+    return useQuery({
+      queryKey: ["movieByGenre", genreId, pageNum],
+      queryFn: () => getMoviesByGenre(genreId, pageNum)},
+    );
+  };
+
+  export const useAllGenres = () => {
+    return useQuery({
+      queryKey: ["genres"],
+      queryFn: getAllGenres},
+    );
   };
