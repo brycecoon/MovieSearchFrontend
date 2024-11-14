@@ -8,6 +8,7 @@ import Navbar from "./Components/Layout/Navbar";
 import AdminPage from "./Pages/AdminPage";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import PageNotFound from "./Pages/404Page/PageNotFound";
+import InTheatres from "./Pages/InTheatres";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/allmovies" element={<AllMovies />}></Route>
+        <Route path="/inTheatres" element={<InTheatres />}></Route>
         <Route
           path="/adminpage"
           element={

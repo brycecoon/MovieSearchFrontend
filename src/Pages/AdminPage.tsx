@@ -30,10 +30,6 @@ const AdminPage = () => {
   useEffect(() => {
     const checkAuthorization = async () => {
         setIsAuthorized(await checkIfAuthorized(auth, users));
-        // if (!isAuthorized) {
-        //   console.log("user is not authorized", auth.user, users)
-        //   navigate("/");
-        // }
       };
 
       checkAuthorization();

@@ -1,20 +1,28 @@
-import Skeleton from '@mui/material/Skeleton';
-import Stack from '@mui/material/Stack';
+import { useMovieByPage } from "../Functions/Queries/MovieHooks";
+import { useState } from "react";
+import MovieCard from "../Components/MovieCard";
 
 const AllMovies = () => {
+  const [currPage, setCurrPage] = useState<number>(3);
+  const { data: Movies } = useMovieByPage(currPage);
+
+  const pageChange = (changeNum: number) => {
+    if (currPage + changeNum > 0) {
+      setCurrPage((prevPage) => prevPage + changeNum);
+    }
+  };
+
   return (
-    <div>
-    <Stack spacing={1}>
-      {/* For variant="text", adjust the height via font-size */}
-      <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+    <>
+      <button onClick={() => pageChange(-1)}>Decrease Page</button>
+      <button onClick={() => pageChange(1)}>Increase Page</button>
+      <div>
+        {Movies?.map((m) => {
+          return <MovieCard key={m.id} movie={m} />;
+        })}
+      </div>
+    </>
+  );
+};
 
-      {/* For other variants, adjust the size with `width` and `height` */}
-      <Skeleton variant="circular" width={40} height={40} />
-      <Skeleton variant="rectangular" width={210} height={60} />
-      <Skeleton variant="rounded" width={210} height={60} />
-    </Stack>  
-    </div>
-    )
-}
-
-export default AllMovies
+export default AllMovies;

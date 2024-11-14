@@ -1,5 +1,6 @@
 import NavItem from "./NavItem";
 import LoginButton from "../../AuthStuff/LoginButton";
+import PopcornIcon from '../../assets/popcorn.svg';
 
 const Navbar = () => {
   return (
@@ -8,6 +9,7 @@ const Navbar = () => {
         <div className="flex space-x-4">
           <NavItem to="/" icon="bi-house-door" text="Home" />
           <NavItem to="/allMovies" icon="bi-film" text="All Movies" />
+          <NavItem to="/inTheatres" icon={PopcornIcon} text="In Theatres" />
           <NavItem to="/adminpage" icon="bi-person-badge" text="Admin" />
         </div>
 

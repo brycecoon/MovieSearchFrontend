@@ -12,3 +12,10 @@ export const getTrendingMovies = async (): Promise<Movie[]> => {
   return response.data;
 };
 
+export const getMoviesByPage = async (pageNum: number): Promise<Movie[]> => {
+  const response = await axios.get(`/api/movieapi/getMoviesByPage`, {
+    params: { pageNum },
+  });
+  return response.data;
+};
+
