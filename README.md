@@ -92,12 +92,12 @@ New things I'll have to do
  - 10/10 Authorized Pages and Public Pages
 
 #### Projected New Done Rubric Items:
- - one new page []
- - reusable card component for Movie []
- - Context for movies []
+ - one new page [X]
+ - reusable card component for Movie [X]
+ - Context for movies [X]
 
 #### Projected Features Completed:
- - Search Page (filters) []
+ - Search Page (filters) [X]
 
 
 # Nov 16
