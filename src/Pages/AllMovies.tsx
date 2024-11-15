@@ -1,13 +1,23 @@
-import { useAllGenres, useMovieByGenre, useMovieByPage } from "../Functions/Queries/MovieHooks";
+import {
+  useAllGenres,
+  useMovieByGenre,
+  useMovieByPage,
+  useSearchByName,
+} from "../Functions/Queries/MovieHooks";
 import { useState } from "react";
 import MovieCard from "../Components/MovieCard";
+import { Form } from "react-router-dom";
 
 const AllMovies = () => {
-  const [currPage, setCurrPage] = useState<number>(3);
-  const [currGenre, setCurrGenre] = useState<number>(3);
-  const { data: Movies } = useMovieByPage(currPage);
+  const [currPage, setCurrPage] = useState<number>(1);
+  const [currGenre, setCurrGenre] = useState<number>(1);
+  const [searching, setSearching] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string>("");
+  const [movieToSearch, setMovieToSearch] = useState<string>("barbie");
+  const { data: AllMovies } = useMovieByPage(currPage);
   const { data: GenreMovies } = useMovieByGenre(currGenre, currPage);
   const { data: Genres } = useAllGenres();
+  const { data: searchByName } = useSearchByName(movieToSearch, currPage);
 
   const pageChange = (changeNum: number) => {
     if (currPage + changeNum > 0) {
@@ -16,13 +26,31 @@ const AllMovies = () => {
   };
 
   const changeSelect = (genreId: number) => {
-    setCurrGenre(genreId)
-  }
+    setSearching(true);
+    setCurrGenre(genreId);
+    setCurrPage(1);
+  };
+
+  const searchForMovie = (event: React.FormEvent) => {
+    event.preventDefault();
+    setMovieToSearch(inputValue);
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value); // Update state with input value
+  };
 
   return (
     <>
       <button onClick={() => pageChange(-1)}>Decrease Page</button>
       <button onClick={() => pageChange(1)}>Increase Page</button>
+      <form onSubmit={searchForMovie}>
+        <input
+          placeholder="Search Movie"
+          value={inputValue}
+          onChange={handleInputChange} // Handle input change
+        />{" "}
+      </form>
       <div>
         <select onChange={(e) => changeSelect(Number(e.target.value))}>
           {Genres?.map((g) => (
@@ -32,9 +60,12 @@ const AllMovies = () => {
           ))}
         </select>
       </div>
-      {GenreMovies?.map((m) => {
-        return <MovieCard key={m.id} movie={m} />;
-      })}
+
+      <div>On Page:{currPage}</div>
+      {/* {searching
+        ? GenreMovies?.map((m) => <MovieCard key={m.id} movie={m} />)
+        : AllMovies?.map((m) => <MovieCard key={m.id} movie={m} />)} */}
+        {searchByName?.map((s)=> <MovieCard key={s.id} movie={s}/>)}
     </>
   );
 };

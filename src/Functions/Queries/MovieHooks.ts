@@ -1,37 +1,45 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllGenres, getMoviesByGenre, getMoviesByPage, getMoviesNowPlaying, getTrendingMovies } from "../MovieRequests";
+import { getAllGenres, getMoviesByGenre, getMoviesByPage, getMoviesNowPlaying, getTrendingMovies, searchByName } from "../MovieRequests";
+import { queryKeyFactory } from "./QueryKeyFactory";
 
 export const useAllMoviesNowPlaying = () => {
     return useQuery({
-      queryKey: ["nowPlayingMovies"],
+      queryKey: queryKeyFactory.nowPlayingMovies(),
       queryFn: getMoviesNowPlaying,
     });
   };
 
   export const useAllTrendingMovies = () => {
     return useQuery({
-      queryKey: ["trendingMovies"],
+      queryKey: queryKeyFactory.trendingMovies(),
       queryFn: getTrendingMovies,
     });
   };
 
   export const useMovieByPage = (pageNum: number) => {
     return useQuery({
-      queryKey: ["movieByPage", pageNum],
+      queryKey: queryKeyFactory.movieByPage(pageNum),
       queryFn: () => getMoviesByPage(pageNum)},
     );
   };
 
   export const useMovieByGenre = (genreId: number, pageNum: number) => {
     return useQuery({
-      queryKey: ["movieByGenre", genreId, pageNum],
+      queryKey: queryKeyFactory.movieByGenre(genreId, pageNum),
       queryFn: () => getMoviesByGenre(genreId, pageNum)},
     );
   };
 
   export const useAllGenres = () => {
     return useQuery({
-      queryKey: ["genres"],
+      queryKey: queryKeyFactory.genres(),
       queryFn: getAllGenres},
+    );
+  };
+
+  export const useSearchByName = (movieToSearch: string, pageNum: number) => {
+    return useQuery({
+      queryKey: queryKeyFactory.searchByName(movieToSearch, pageNum),
+      queryFn: () => searchByName(movieToSearch, pageNum)},
     );
   };

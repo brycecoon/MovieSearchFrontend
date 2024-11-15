@@ -2,7 +2,6 @@ import axios from "axios";
 import { Movie } from "../Data/Interfaces/Movie";
 import { Genre } from "../Data/Interfaces/Genre";
 
-
 export const getMoviesNowPlaying = async (): Promise<Movie[]> => {
   const response = await axios.get(`/api/movieapi/getNowPlaying`);
   return response.data;
@@ -20,7 +19,10 @@ export const getMoviesByPage = async (pageNum: number): Promise<Movie[]> => {
   return response.data;
 };
 
-export const getMoviesByGenre = async (genreId: number, pageNum: number): Promise<Movie[]> => {
+export const getMoviesByGenre = async (
+  genreId: number,
+  pageNum: number
+): Promise<Movie[]> => {
   const response = await axios.get(`/api/movieapi/getPageOfMoviesByGenre`, {
     params: { genreId, pageNum },
   });
@@ -28,7 +30,16 @@ export const getMoviesByGenre = async (genreId: number, pageNum: number): Promis
 };
 
 export const getAllGenres = async (): Promise<Genre[]> => {
-  const response = await axios.get(`/api/movieapi/generateGenres`)
+  const response = await axios.get(`/api/movieapi/generateGenres`);
   return response.data;
 };
 
+export const searchByName = async (
+  movieToSearch: string,
+  pageNum: number
+): Promise<Movie[]> => {
+  const response = await axios.get(`/api/movieapi/searchMovies`, {
+    params: { movieToSearch, pageNum },
+  });
+  return response.data;
+};
