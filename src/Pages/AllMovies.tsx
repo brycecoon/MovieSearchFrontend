@@ -6,7 +6,6 @@ import {
 } from "../Functions/Queries/MovieHooks";
 import { useState } from "react";
 import MovieCard from "../Components/MovieCard";
-import { Form } from "react-router-dom";
 
 const AllMovies = () => {
   const [currPage, setCurrPage] = useState<number>(1);
@@ -14,10 +13,13 @@ const AllMovies = () => {
   const [searching, setSearching] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
   const [movieToSearch, setMovieToSearch] = useState<string>("barbie");
-  const { data: AllMovies } = useMovieByPage(currPage);
-  const { data: GenreMovies } = useMovieByGenre(currGenre, currPage);
-  const { data: Genres } = useAllGenres();
-  const { data: searchByName } = useSearchByName(movieToSearch, currPage);
+  const { data: MoviesByPage, isLoading: isLoadingMoviesByPage } =
+    useMovieByPage(currPage);
+  const { data: GenreMovies, isLoading: isLoadingGenreMovies } =
+    useMovieByGenre(currGenre, currPage);
+  const { data: Genres, isLoading: isLoadingGenres } = useAllGenres();
+  const { data: searchResults, isLoading: isLoadingSearchResults } =
+    useSearchByName(movieToSearch, currPage);
 
   const pageChange = (changeNum: number) => {
     if (currPage + changeNum > 0) {
@@ -26,19 +28,29 @@ const AllMovies = () => {
   };
 
   const changeSelect = (genreId: number) => {
-    setSearching(true);
     setCurrGenre(genreId);
+    setSearching(false);
     setCurrPage(1);
   };
 
   const searchForMovie = (event: React.FormEvent) => {
     event.preventDefault();
     setMovieToSearch(inputValue);
+    setSearching(true);
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value); // Update state with input value
+    setInputValue(event.target.value);
   };
+
+  if (
+    isLoadingMoviesByPage ||
+    isLoadingGenreMovies ||
+    isLoadingGenres ||
+    isLoadingSearchResults
+  ) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -48,7 +60,7 @@ const AllMovies = () => {
         <input
           placeholder="Search Movie"
           value={inputValue}
-          onChange={handleInputChange} // Handle input change
+          onChange={handleInputChange}
         />{" "}
       </form>
       <div>
@@ -61,11 +73,16 @@ const AllMovies = () => {
         </select>
       </div>
 
-      <div>On Page:{currPage}</div>
-      {/* {searching
-        ? GenreMovies?.map((m) => <MovieCard key={m.id} movie={m} />)
-        : AllMovies?.map((m) => <MovieCard key={m.id} movie={m} />)} */}
-        {searchByName?.map((s)=> <MovieCard key={s.id} movie={s}/>)}
+      <div>Current Page:{currPage}</div>
+      <div>
+        {searching
+          ? searchResults?.map((m) => {
+              return <MovieCard key={m.id} movie={m} />;
+            })
+          : (GenreMovies?.length ? GenreMovies : MoviesByPage)?.map((m) => {
+              return <MovieCard key={m.id} movie={m} />;
+            })}
+      </div>
     </>
   );
 };
