@@ -117,11 +117,11 @@ New things I'll have to do
  - 10/10 Authorized Pages and Public Pages
 
 #### Projected New Done Rubric Items:
- - 2 more pages  []
+ - 2 more pages  [X]
 
 #### Projected Features Completed:
- - Movies in Theatres []
- - Single Movie Detail Page []
+ - Movies in Theatres [X]
+ - Single Movie Detail Page [X]
 
 
 # Nov 20
