@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Movie } from "../Data/Interfaces/Movie";
+import { useNavigate } from "react-router-dom";
 const imageBaseUrl = "https://image.tmdb.org/t/p/w300";
 
 interface MovieCardProps {
@@ -7,6 +8,8 @@ interface MovieCardProps {
 }
 
 const MovieCard: FC<MovieCardProps> = ({ movie }) => {
+const navigate = useNavigate();
+
   return (
     <>
       <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
@@ -14,7 +17,8 @@ const MovieCard: FC<MovieCardProps> = ({ movie }) => {
           src={`${imageBaseUrl}/${movie.poster_path}`}
           alt={movie.title}
           className="w-full h-72 object-cover"
-        />
+          onClick={() => navigate(`/movieDetails/${movie.id}`)}
+        />)
         <div className="px-4 py-2">
           <h2 className="font-bold text-xl text-gray-800">{movie.title}</h2>
           <p className="text-gray-600 text-sm">{movie.release_date}</p>

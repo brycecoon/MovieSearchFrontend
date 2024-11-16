@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Movie } from "../Data/Interfaces/Movie";
 import { Genre } from "../Data/Interfaces/Genre";
+import { SingleMovieDetails } from "../Data/Interfaces/SingleMovie";
 
 export const getMoviesNowPlaying = async (): Promise<Movie[]> => {
   const response = await axios.get(`/api/movieapi/getNowPlaying`);
@@ -40,6 +41,15 @@ export const searchByName = async (
 ): Promise<Movie[]> => {
   const response = await axios.get(`/api/movieapi/searchMovies`, {
     params: { movieToSearch, pageNum },
+  });
+  return response.data;
+};
+
+export const getSingleMovie = async (
+  movieId: number
+): Promise<SingleMovieDetails> => {
+  const response = await axios.get(`/api/movieapi/getSingleMovieDetails`, {
+    params: { movieId },
   });
   return response.data;
 };

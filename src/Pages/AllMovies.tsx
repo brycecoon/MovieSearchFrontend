@@ -12,14 +12,14 @@ const AllMovies = () => {
   const [currGenre, setCurrGenre] = useState<number>(1);
   const [searching, setSearching] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
-  const [movieToSearch, setMovieToSearch] = useState<string>("barbie");
+  const [movieToSearch, setMovieToSearch] = useState<string>("a");
   const { data: MoviesByPage, isLoading: isLoadingMoviesByPage } =
     useMovieByPage(currPage);
   const { data: GenreMovies, isLoading: isLoadingGenreMovies } =
     useMovieByGenre(currGenre, currPage);
-  const { data: Genres, isLoading: isLoadingGenres } = useAllGenres();
   const { data: searchResults, isLoading: isLoadingSearchResults } =
     useSearchByName(movieToSearch, currPage);
+  const { data: Genres, isLoading: isLoadingGenres } = useAllGenres();
 
   const pageChange = (changeNum: number) => {
     if (currPage + changeNum > 0) {

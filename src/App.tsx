@@ -9,6 +9,7 @@ import AdminPage from "./Pages/AdminPage";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import PageNotFound from "./Pages/404Page/PageNotFound";
 import InTheatres from "./Pages/InTheatres";
+import MovieDetails from "./Pages/MovieDetails";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/allmovies" element={<AllMovies />}></Route>
         <Route path="/inTheatres" element={<InTheatres />}></Route>
+        <Route path="/movieDetails/:id" element={<MovieDetails />}></Route>
         <Route
           path="/adminpage"
           element={
