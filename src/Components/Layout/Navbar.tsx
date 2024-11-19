@@ -10,6 +10,7 @@ const Navbar = () => {
           <NavItem to="/" icon="bi-house-door" text="Home" />
           <NavItem to="/allMovies" icon="bi-film" text="All Movies" />
           <NavItem to="/inTheatres" icon={PopcornIcon} text="In Theatres" />
+          <NavItem to="/myLists" icon={PopcornIcon} text="My Lists" />
           <NavItem to="/adminpage" icon="bi-person-badge" text="Admin" />
         </div>
 

@@ -6,4 +6,7 @@ export const queryKeyFactory = {
     genres: () => ["genres"],
     searchByName: (movieToSearch: string, pageNum: number) => ["searchByName", movieToSearch, pageNum],
     getSingleMovie: (movieId: number) => ["singleMovie", movieId],
+    lists: () => ["lists"],
+    listMovies: () => ["listMovies"],
+    users: () => ["users"],
   };

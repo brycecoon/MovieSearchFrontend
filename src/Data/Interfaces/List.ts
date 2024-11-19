@@ -1,4 +1,4 @@
-export interface Employee {
+export interface List {
     id: number;
     name: string;
     userid: number;
