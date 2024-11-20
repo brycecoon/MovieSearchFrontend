@@ -74,7 +74,7 @@ const AllMovies = () => {
       </div>
 
       <div>Current Page:{currPage}</div>
-      <div>
+      <div className="grid grid-cols-3">
         {searching
           ? searchResults?.map((m) => {
               return <MovieCard key={m.id} movie={m} />;

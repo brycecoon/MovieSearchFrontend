@@ -9,4 +9,5 @@ export const queryKeyFactory = {
     lists: () => ["lists"],
     listMovies: () => ["listMovies"],
     users: () => ["users"],
+    listOfSingleMovies: (listId: number) => ["listOfSingleMovies", listId]
   };

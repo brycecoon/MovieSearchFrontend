@@ -1,26 +1,13 @@
 import { useState } from "react";
 import { listDTO } from "../Data/DTOs/listDTO";
-import { ListMovieDTO } from "../Data/DTOs/listMovieDTO";
-import { List } from "../Data/Interfaces/List";
-import {
-  useAddList,
-  useAllLists,
-  useDeleteList,
-  useEditList,
-} from "../Functions/Queries/ListHooks";
-import {
-  useAddListMovie,
-  useAllListMovies,
-  useDeleteListMovie,
-} from "../Functions/Queries/listMovieHooks";
+import { useAddList, useAllLists } from "../Functions/Queries/ListHooks";
+
+import MovieList from "../Components/MovieList";
 
 const MyLists = () => {
   const { data: lists, isLoading: listsLoading } = useAllLists();
-  const { data: listMovies, isLoading: listMoviesLoading } = useAllListMovies();
   const addList = useAddList();
-  const updateList = useEditList();
-  const deleteList = useDeleteList();
-  const deleteListMovie = useDeleteListMovie();
+
   const [listName, setListName] = useState<string>("");
 
   const addNewList = () => {
@@ -32,15 +19,7 @@ const MyLists = () => {
     setListName("");
   };
 
-  const deleteFromList = (id: number) => {
-    deleteListMovie.mutate(id);
-  };
-
-  const deleteWholeList = (id: number) => {
-    deleteList.mutate(id);
-  };
-
-  if (listsLoading || listMoviesLoading) {
+  if (listsLoading) {
     return <div>...Loading</div>;
   }
 
@@ -49,27 +28,24 @@ const MyLists = () => {
       <div>
         {lists?.map((l) => (
           <div key={l.id}>
-            {l.name}
-            {listMovies
-              ?.filter((lm) => lm.listId === l.id)
-              .map((lm) => (
-                <div key={lm.id}>
-                  {lm.listId} {lm.movieId}
-                  <button onClick={() => deleteFromList(lm.id)}>
-                    Delete this movie
-                  </button>
-                </div>
-              ))}
-
-            <button onClick={() => deleteWholeList(l.id)}>
-              Delete Whole List
-            </button>
+            <div className="text-3xl pt-7 pb-3">{l.name}</div>
+            <div key={l.id}>
+              <MovieList key={l.id} listId={l.id} />
+            </div>
           </div>
         ))}
       </div>
 
-      <input type="text" value={listName} placeholder="My New List" onChange={(e) => setListName(e.target.value)}/>
-      <button onClick={addNewList}>Add A List</button>
+      <input
+        type="text"
+        value={listName}
+        placeholder="My New List"
+        className="pt-6"
+        onChange={(e) => setListName(e.target.value)}
+      />
+      <button className="bg-green-300 text-green-700" onClick={addNewList}>
+        Add A List
+      </button>
     </>
   );
 };

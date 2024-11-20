@@ -1,8 +1,6 @@
 import { FC } from "react";
 import { Movie } from "../Data/Interfaces/Movie";
 import { useNavigate } from "react-router-dom";
-import { useAddListMovie } from "../Functions/Queries/listMovieHooks";
-import { ListMovieDTO } from "../Data/DTOs/listMovieDTO";
 const imageBaseUrl = "https://image.tmdb.org/t/p/w300";
 
 interface MovieCardProps {
