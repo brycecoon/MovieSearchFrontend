@@ -13,6 +13,8 @@ import MovieDetails from "./Pages/MovieDetails";
 import MyLists from "./Pages/MyLists";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ActorDirector from "./Pages/ActorDirector";
+import ActorDetails from "./Pages/ActorDetails";
 
 
 function App() {
@@ -32,7 +34,9 @@ function App() {
         <Route path="/allmovies" element={<AllMovies />}></Route>
         <Route path="/inTheatres" element={<InTheatres />}></Route>
         <Route path="/myLists" element={<MyLists />}></Route>
+        <Route path="/actordirector" element={<ActorDirector />}></Route>
         <Route path="/movieDetails/:id" element={<MovieDetails />}></Route>
+        <Route path="/actorDetails/:id" element={<ActorDetails />}></Route>
         <Route
           path="/adminpage"
           element={
