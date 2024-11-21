@@ -8,9 +8,7 @@ import { User } from "../Data/Interfaces/User";
 const checkIfAuthorized = async (auth: AuthContextProps, users: User[] | undefined): Promise<boolean> => {
   if (auth.user && auth.user.id_token) {
       const data = await callAuthEndpoint(auth.user.id_token);
-      console.log("data: " + data)
       const loggedInUser = await users?.find((u) => u.email === data);
-      console.log("currUser is", loggedInUser);
 
       if (loggedInUser && loggedInUser.roleId == 2) {
           return true; 
@@ -25,13 +23,10 @@ const AdminPage = () => {
   const navigate = useNavigate();
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
 
-
-
   useEffect(() => {
     const checkAuthorization = async () => {
         setIsAuthorized(await checkIfAuthorized(auth, users));
       };
-
       checkAuthorization();
   }, [auth, auth.user?.id_token, navigate, users]);
 

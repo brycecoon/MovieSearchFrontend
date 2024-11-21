@@ -11,6 +11,8 @@ import PageNotFound from "./Pages/404Page/PageNotFound";
 import InTheatres from "./Pages/InTheatres";
 import MovieDetails from "./Pages/MovieDetails";
 import MyLists from "./Pages/MyLists";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 function App() {
@@ -39,6 +41,8 @@ function App() {
         ></Route>
         <Route path="/*" element={<PageNotFound />}></Route>
       </Routes>
+
+      <ToastContainer position="bottom-right" />
     </>
   );
 }

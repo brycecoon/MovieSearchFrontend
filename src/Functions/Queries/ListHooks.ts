@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { queryKeyFactory } from "./QueryKeyFactory";
 import { addList, deleteList, editList, getLists } from "../ListRequests";
+import { toast } from "react-toastify";
 
 export const useAllLists = () => {
   return useQuery({
@@ -15,7 +16,11 @@ export const useAddList = () => {
   return useMutation({
     mutationFn: addList,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeyFactory.lists()});
+      queryClient.invalidateQueries({ queryKey: queryKeyFactory.lists() });
+      toast.success("List Added");
+    },
+    onError: () => {
+      toast.error("Error Adding List");
     },
   });
 };
@@ -26,7 +31,11 @@ export const useEditList = () => {
   return useMutation({
     mutationFn: editList,
     onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: queryKeyFactory.lists()});
+      queryClient.invalidateQueries({ queryKey: queryKeyFactory.lists() });
+      toast.success("Name Updated");
+    },
+    onError: () => {
+      toast.error("Error Updating List Name");
     },
   });
 };
@@ -37,7 +46,11 @@ export const useDeleteList = () => {
   return useMutation({
     mutationFn: deleteList,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeyFactory.lists()});
+      queryClient.invalidateQueries({ queryKey: queryKeyFactory.lists() });
+      toast.success("List Deleted");
+    },
+    onError: () => {
+      toast.error("Error Deleting List");
     },
   });
 };

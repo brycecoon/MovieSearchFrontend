@@ -27,9 +27,9 @@ const MyLists = () => {
     <>
       <div>
         {lists?.map((l) => (
-          <div key={l.id}>
-            <div className="text-3xl pt-7 pb-3">{l.name}</div>
-            <div key={l.id}>
+          <div key={l.id} className="w-full">
+            <div key={l.id} className="bg-slate-500">
+            <div className="text-3xl pt-7 pb-3 bg-black text-white flex justify-center items-center">{l.name}</div>
               <MovieList key={l.id} listId={l.id} />
             </div>
           </div>
