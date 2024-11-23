@@ -169,12 +169,10 @@ New things I'll have to do
  - 10/10 Authorized Pages and Public Pages
 
 #### Projected New Done Rubric Items:
- - One more page []
- - Reusable Radio Component []
+ - One more page [X]
 
 #### Projected Features Completed:
- - Voting page, also shows top voted on the landing page []
-
+ - Movie information and facts page [X]
 
 # Nov 26
 #### Projected Rubric Evaluation:
@@ -218,10 +216,8 @@ New things I'll have to do
  - 10/10 Authorized Pages and Public Pages
 
 #### Projected New Done Rubric Items:
- - reusable layout component to show facts on the facts page []
  - one more page []
 
 #### Projected Features Completed:
- - Movie information and facts page
  - Finish up Styling
  - Stretch goal if time, but I might not get to it
