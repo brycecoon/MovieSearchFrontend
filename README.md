@@ -141,11 +141,16 @@ New things I'll have to do
  - 10/10 Authorized Pages and Public Pages
 
 #### Projected New Done Rubric Items:
- - One more page []
- - Reusable layout component for a list []
+ - Three more pages [X]
+ - Reusable layout component for a list [X]
+ - Toasts[X]
+ - Reusable Input and Select Component [X]
 
 #### Projected Features Completed:
- - Lists Page []
+ - Lists Page [X]
+ - Actor/Director Page [X]
+ - Actor Details Page[X]
+   
 
 # Nov 23
 #### Projected Rubric Evaluation:
@@ -164,13 +169,11 @@ New things I'll have to do
  - 10/10 Authorized Pages and Public Pages
 
 #### Projected New Done Rubric Items:
- - Two more pages []
- - Reusable Input, select, and Radio Components []
- - Toasts, also resuable layout component []
+ - One more page []
+ - Reusable Radio Component []
 
 #### Projected Features Completed:
  - Voting page, also shows top voted on the landing page []
- - Actor/Director Page []
 
 
 # Nov 26
