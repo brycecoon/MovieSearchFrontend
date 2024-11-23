@@ -13,7 +13,7 @@ const FunMovieFacts = () => {
       <main className="px-6 lg:px-24 py-10">
         {/* Fact List */}
         {facts.map((fact, index) => (
-          <div className="bg-stone-200 px-10 py-7 my-3 rounded-md">
+          <div key={fact.title} className="bg-stone-200 px-10 py-7 my-3 rounded-md">
             <h2 className="flex justify-center text-4xl font-semibold mb-10">{index + 1}. {fact.title}</h2>
           <section key={index} className="mb-12 grid lg:grid-cols-2 items-center">
             <img
