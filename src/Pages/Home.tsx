@@ -32,8 +32,8 @@ const Home = () => {
   }
 
   return (
-    <>
-      <main className="container mx-auto py-8">
+    <div className="min-h-screen flex flex-col">
+      <main className="flex-grow container mx-auto py-8">
         {/* Intro Section */}
         <section className="mb-10 text-center">
           <h2 className="text-2xl font-semibold mb-4">
@@ -44,7 +44,7 @@ const Home = () => {
             the perfect movie for any occasion.
           </p>
         </section>
-
+  
         {/* Movie Grid */}
         <section>
           <h3 className="text-xl font-bold mb-4">Movies</h3>
@@ -55,15 +55,15 @@ const Home = () => {
           </div>
         </section>
       </main>
-
+  
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-4">
         <div className="container mx-auto text-center">
           <p>&copy; 2024 MovieSearch. All rights reserved.</p>
         </div>
       </footer>
-    </>
-  );
+    </div>
+  );  
 };
 
 export default Home;

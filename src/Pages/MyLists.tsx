@@ -30,7 +30,7 @@ const MyLists = () => {
           <div key={l.id} className="w-full">
             <div key={l.id} className="bg-slate-500">
             <div className="text-3xl pt-7 pb-3 bg-black text-white flex justify-center items-center">{l.name}</div>
-              <MovieList key={l.id} listId={l.id} />
+              <MovieList key={l.id} list={l} />
             </div>
           </div>
         ))}

@@ -7,9 +7,9 @@ export const queryKeyFactory = {
     searchByName: (movieToSearch: string, pageNum: number) => ["searchByName", movieToSearch, pageNum],
     getSingleMovie: (movieId: number) => ["singleMovie", movieId],
     lists: () => ["lists"],
-    listMovies: () => ["listMovies"],
+    listMoviesPerList: (listId: number) => ["listMovies", listId],
     users: () => ["users"],
     actors: (pageNum: number) => ["actors", pageNum],
     singleActor: (actorId: number) => ["actor", actorId],
-    listOfSingleMovies: (listId: number) => ["listOfSingleMovies", listId]
+    movieListByListId: (listId: number) => ["listOfSingleMovies", listId]
   };

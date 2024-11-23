@@ -1,17 +1,15 @@
 import { FC, useState } from "react";
-import { useGetListOfMovies } from "../Functions/Queries/MovieHooks";
+// import { useGetListOfMovies } from "../Functions/Queries/MovieHooks";
 import MovieCard from "./MovieCard";
 import { SingleMovieDetails } from "../Data/Interfaces/SingleMovie";
 import { Movie } from "../Data/Interfaces/Movie";
-import {
-  useAllListMovies,
-  useDeleteListMovie,
-} from "../Functions/Queries/listMovieHooks";
+import { useDeleteListMovie } from "../Functions/Queries/listMovieHooks";
 import { List } from "../Data/Interfaces/List";
 import { useDeleteList, useEditList } from "../Functions/Queries/ListHooks";
+import { useMovieListByListId } from "../Functions/Queries/MovieHooks";
 
 interface MovieListProps {
-  listId: number;
+  list: List;
 }
 
 const transformedMovie = (singleMovie: SingleMovieDetails): Movie => ({
@@ -31,18 +29,21 @@ const transformedMovie = (singleMovie: SingleMovieDetails): Movie => ({
   vote_count: singleMovie.vote_count,
 });
 
-const MovieList: FC<MovieListProps> = ({ listId }) => {
-  const { data: listOfMovies, isLoading : listOfMoviesLoading} = useGetListOfMovies(listId);
-  const { data: listMovies, isLoading: listMoviesLoading } = useAllListMovies();
-  const deleteListMovie = useDeleteListMovie(listId);
+const MovieList: FC<MovieListProps> = ({ list }) => {
+  const [deletedMovieId, setdeletedMovieId] = useState<number>(0);
+  const { data: MovieList, isLoading: MovieListLoading } = useMovieListByListId(
+    list.id
+  );
+  const deleteListMovie = useDeleteListMovie(list.id, deletedMovieId);
   const updateList = useEditList();
   const deleteList = useDeleteList();
   const [updatedListName, setUpdatedListName] = useState<string | undefined>(
     undefined
   );
 
-  const deleteFromList = (id: number) => {
-    deleteListMovie.mutate(id);
+  const deleteFromList = (movieId: number) => {
+    setdeletedMovieId(movieId);
+    deleteListMovie.mutate();
   };
 
   const deleteWholeList = (id: number) => {
@@ -52,7 +53,7 @@ const MovieList: FC<MovieListProps> = ({ listId }) => {
   const updateListName = () => {
     if (updatedListName) {
       const updatedList: List = {
-        id: listId,
+        id: list.id,
         name: updatedListName,
         userid: 18,
       };
@@ -61,9 +62,10 @@ const MovieList: FC<MovieListProps> = ({ listId }) => {
     }
   };
 
-  if (listOfMoviesLoading || listMoviesLoading) {
+  if (MovieListLoading) {
     return <div className="text-center text-lg font-semibold">...Loading</div>;
   }
+
 
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-6">
@@ -83,36 +85,38 @@ const MovieList: FC<MovieListProps> = ({ listId }) => {
         </button>
         <button
           className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
-          onClick={() => deleteWholeList(listId)}
+          onClick={() => deleteWholeList(list.id)}
         >
           Delete Whole List
         </button>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {listOfMovies?.map((movie) => {
-          const displayMovie = transformedMovie(movie);
-          const currListMovie = listMovies?.find(
-            (lm) => lm.movieId === movie.id && lm.listId === listId
-          );
-
-          return (
-            <div
-              className="flex flex-col items-center space-y-4 bg-white p-4 rounded-lg shadow-md"
-              key={currListMovie?.id || `movie-${movie.id}`}
-            >
-              <MovieCard movie={displayMovie} />
-              {currListMovie && (
-                <button
-                  className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
-                  onClick={() => deleteFromList(currListMovie?.id)}
-                >
-                  Delete this movie
-                </button>
-              )}
-            </div>
-          );
-        })}
+        {MovieList?.length === 0 ? (
+          <div className="text-center text-lg font-semibold">
+            No movies found.
+          </div>
+        ) : (
+          MovieList?.map((movie) => {
+            const displayMovie = transformedMovie(movie);
+            return (
+              <div
+                className="flex flex-col items-center space-y-4 bg-white p-4 rounded-lg shadow-md"
+                key={movie.id || `movie-${movie.id}`}
+              >
+                <MovieCard movie={displayMovie} />
+                {movie && (
+                  <button
+                    className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+                    onClick={() => deleteFromList(movie.id)}
+                  >
+                    Delete this movie
+                  </button>
+                )}
+              </div>
+            );
+          })
+        )}
       </div>
     </div>
   );
