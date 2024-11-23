@@ -193,11 +193,10 @@ New things I'll have to do
 #### Projected New Done Rubric Items:
  - Use local storage for user information and login stuff []
  - Error handling []
- - two more pages []
+ - One more pages []
 
 #### Projected Features Completed:
  - User Profile Page []
- - What should I watch Page []
 
 # Dec 4
 #### Projected Rubric Evaluation:
