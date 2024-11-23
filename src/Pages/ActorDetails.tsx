@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useGetActorById } from "../Functions/Queries/ActorHooks";
-import { Movie } from "../Data/Interfaces/Movie";
 
 const ActorDetails = () => {
     const {id} = useParams();
