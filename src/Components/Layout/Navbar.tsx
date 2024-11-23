@@ -3,6 +3,7 @@ import LoginButton from "../../AuthStuff/LoginButton";
 import PopcornIcon from '../../assets/popcorn.svg';
 import listIcon from '../../assets/list.svg';
 import movieStarIcon from '../../assets/movieStar.svg';
+import factsIcon from '../../assets/facts.svg';
 
 const Navbar = () => {
   return (
@@ -14,6 +15,7 @@ const Navbar = () => {
           <NavItem to="/inTheatres" icon={PopcornIcon} text="In Theatres" customIcon={true} />
           <NavItem to="/myLists" icon={listIcon} text="My Lists" customIcon={true}/>
           <NavItem to="/actordirector" icon={movieStarIcon} text="Movie Stars" customIcon={true}/>
+          <NavItem to="/movieFacts" icon={factsIcon} text="Movie Facts" customIcon={true}/>
           <NavItem to="/adminpage" icon="bi-person-badge" text="Admin" customIcon={false}/>
         </div>
 

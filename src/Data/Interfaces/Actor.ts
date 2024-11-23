@@ -3,9 +3,9 @@ import { KnownForMovie } from "./KnownForMovie";
 export interface Actor {
     id: number;
     name: string;
-    knownForDepartment: string;
+    known_for_department: string;
     gender: number;
     popularity: number;
     profile_path?: string;
-    knownFor: KnownForMovie[];
+    known_for: KnownForMovie[];
   }

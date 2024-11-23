@@ -26,11 +26,13 @@ const ActorCard: FC<ActorCardProps> = ({ actor }) => {
       {/* Actor Info */}
       <div className="px-4 py-3">
         {/* Name */}
-        <h2 className="font-bold text-lg text-gray-800 truncate">{actor.name}</h2>
+        <h2 className="font-bold text-lg text-gray-800 truncate">
+          {actor.name}
+        </h2>
 
         {/* Known For */}
         <p className="text-gray-600 text-sm">
-          <strong>Known For:</strong> {actor.knownForDepartment}
+          <strong>Known For:</strong> {actor.known_for_department}
         </p>
 
         {/* Popularity */}
@@ -42,13 +44,15 @@ const ActorCard: FC<ActorCardProps> = ({ actor }) => {
 
         {/* Known For Movies */}
         <div className="mt-3 text-gray-700 text-sm">
-          <strong>Known For Movies:</strong>
+          <strong>Popular Titles:</strong>
           <ul className="list-disc pl-5">
-            {/* {actor.knownFor.map((movie) => (
-              <li key={movie.id} className="text-sm text-gray-600">
-                {movie.title}
-              </li>
-            ))} */}
+            {actor.known_for.map((movie) =>
+              movie.title ? (
+                <li key={movie.id} className="text-sm text-gray-600">
+                  {movie.title}
+                </li>
+              ) : null
+            )}
           </ul>
         </div>
       </div>

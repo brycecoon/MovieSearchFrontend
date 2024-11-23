@@ -10,6 +10,10 @@ interface MovieCardProps {
 
 const MovieCard: FC<MovieCardProps> = ({ movie }) => {
   const navigate = useNavigate();
+  if(movie.vote_count < 10 || movie.popularity < 2 || !movie.poster_path)
+  {
+    return
+  }
 
   return (
     <div
