@@ -33,7 +33,7 @@ const Navbar = () => {
         </div>
 
         {/* Login Button */}
-        <div>
+        <div className="mr-2">
           <LoginButton />
         </div>
       </div>
