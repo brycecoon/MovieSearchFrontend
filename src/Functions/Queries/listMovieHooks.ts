@@ -1,18 +1,10 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { queryKeyFactory } from "./QueryKeyFactory";
 import {
   addListMovie,
   deleteListMovie,
-  getlistMoviesPerList,
 } from "../ListMovieRequests";
 import { toast } from "react-toastify";
-
-export const useAllListMoviesPerList = (listId: number) => {
-  return useQuery({
-    queryKey: queryKeyFactory.listMoviesPerList(listId),
-    queryFn: () => getlistMoviesPerList(listId),
-  });
-};
 
 export const useAddListMovie = (listId: number) => {
   const queryClient = useQueryClient();
@@ -21,10 +13,10 @@ export const useAddListMovie = (listId: number) => {
     mutationFn: addListMovie,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: queryKeyFactory.listMoviesPerList(listId),
+        queryKey: queryKeyFactory.movieIdsPerCollection(listId),
       });
       queryClient.invalidateQueries({
-        queryKey: queryKeyFactory.movieListByListId(listId),
+        queryKey: queryKeyFactory.moviesByCollectionId(listId),
       });
       toast.success("Movie Added To List");
     },
@@ -41,10 +33,10 @@ export const useDeleteListMovie = (listId: number, movieId: number) => {
     mutationFn: () => deleteListMovie(listId, movieId),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: queryKeyFactory.listMoviesPerList(listId),
+        queryKey: queryKeyFactory.movieIdsPerCollection(listId),
       });
       queryClient.invalidateQueries({
-        queryKey: queryKeyFactory.movieListByListId(listId),
+        queryKey: queryKeyFactory.moviesByCollectionId(listId),
       });
       toast.success("Movie Deleted From List");
     },

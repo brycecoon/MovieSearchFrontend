@@ -9,7 +9,7 @@ import {
   searchByName,
 } from "../MovieRequests";
 import { queryKeyFactory } from "./QueryKeyFactory";
-import { useAllListMoviesPerList } from "./listMovieHooks";
+import { getlistMoviesPerList } from "../ListMovieRequests";
 
 export const useAllMoviesNowPlaying = () => {
   return useQuery({
@@ -61,19 +61,15 @@ export const useGetSingleMovie = (movieId: number) => {
 };
 
 export const useMovieListByListId = (listId: number) => {
-  const { data: listMovies, isLoading: isListMoviesLoading } = useAllListMoviesPerList(listId);
-
   return useQuery({
-    queryKey: queryKeyFactory.movieListByListId(listId),
+    queryKey: queryKeyFactory.moviesByCollectionId(listId),
     queryFn: async () => {
-      if (!listMovies) return []; 
-
-      const filteredMovies = listMovies.filter((lm) => lm.listId === listId);
+      const movieIdsInCollection = await getlistMoviesPerList(listId)
+      const filteredMovies = movieIdsInCollection.filter((lm) => lm.listId === listId);
       const movieDetails = await Promise.all(
         filteredMovies.map((lm) => getSingleMovie(lm.movieId))
       );
       return movieDetails;
     },
-    enabled: !isListMoviesLoading && !!listMovies, 
   });
 };

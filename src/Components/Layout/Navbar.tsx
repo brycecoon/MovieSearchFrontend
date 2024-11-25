@@ -10,7 +10,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-emerald-200 shadow-md w-screen sticky top-0">
+    <nav className="bg-emerald-200 shadow-md w-screen sticky top-0 z-10">
       {/* Navbar Header */}
       <div className="p-4 flex items-center justify-between">
         <button
