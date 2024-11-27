@@ -16,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ActorDirector from "./Pages/ActorDirector";
 import ActorDetails from "./Pages/ActorDetails";
 import FunMovieFacts from "./Pages/FunMovieFacts";
+import UserProfile from "./Pages/UserProfile";
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
         <Route path="/movieFacts" element={<FunMovieFacts />}></Route>
         <Route path="/movieDetails/:id" element={<MovieDetails />}></Route>
         <Route path="/actorDetails/:id" element={<ActorDetails />}></Route>
+        <Route path="/userProfile" element={<UserProfile/>}></Route>
         <Route
           path="/adminpage"
           element={

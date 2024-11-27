@@ -30,6 +30,7 @@ const Navbar = () => {
           <NavItem to="/actordirector" icon={movieStarIcon} text="Movie Stars" customIcon={true} />
           <NavItem to="/movieFacts" icon={factsIcon} text="Movie Facts" customIcon={true} />
           <NavItem to="/adminpage" icon="bi-person-badge" text="Admin" customIcon={false} />
+          <NavItem to="/userProfile" icon="bi-person-circle" text="My Profile" customIcon={false} />
         </div>
 
         {/* Login Button */}
@@ -52,6 +53,7 @@ const Navbar = () => {
           <NavItem to="/actordirector" icon={movieStarIcon} text="Movie Stars" customIcon={true} />
           <NavItem to="/movieFacts" icon={factsIcon} text="Movie Facts" customIcon={true} />
           <NavItem to="/adminpage" icon="bi-person-badge" text="Admin" customIcon={false} />
+          <NavItem to="/userProfile" icon="bi-person-circle" text="My Profile" customIcon={false} />
         </div>
       </div>
     </nav>

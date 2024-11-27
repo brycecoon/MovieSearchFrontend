@@ -40,7 +40,7 @@ const AdminPage = () => {
   return (
     <>
       <div>AdminPage</div>
-      <div>Number of users is: {users?.length || 0}</div>
+      <div>Number of registered users is: {users?.length || 0}</div>
     </>
   );
 };

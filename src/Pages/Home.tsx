@@ -17,17 +17,21 @@ const Home = () => {
 
   async function checkIfUserExists() {
     if (auth.user && auth.user.id_token) {
-      const data = await callAuthEndpoint(auth.user.id_token);
-      const currUser = await getUserByEmail(data);
+      const currUserEmail = await callAuthEndpoint(auth.user.id_token);
+      const currUser = await getUserByEmail(currUserEmail);
+      
+      
       if (!currUser) {
         const newUser: UserDTO = {
-          email: data,
-          name: data,
+          email: currUserEmail,
+          name: currUserEmail,
           biography: "",
           roleid: 1,
         };
-        AddUser(newUser);
+        await AddUser(newUser);
       }
+      const savedUser = await getUserByEmail(currUserEmail);
+      localStorage.setItem("currentUser", JSON.stringify(savedUser));
     }
   }
 

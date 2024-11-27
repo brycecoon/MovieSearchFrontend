@@ -19,3 +19,7 @@ export const getUserByEmail = async (email: string): Promise<User> => {
   });
   return response.data;
 };
+
+export const editUser = async (user: User) => {
+  await axios.put("/api/user/edit", user);
+};

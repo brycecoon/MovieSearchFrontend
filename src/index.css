@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Gravitas+One&family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Karla", sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -27,8 +28,7 @@ a:hover {
 }
 
 body {
-  display: flex;
-  flex-grow: 1;
+  height: 100vh
 }
 
 h1 {
