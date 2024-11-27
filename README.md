@@ -191,12 +191,12 @@ New things I'll have to do
  - 10/10 Authorized Pages and Public Pages
 
 #### Projected New Done Rubric Items:
- - Use local storage for user information and login stuff []
- - Error handling []
- - One more pages []
+ - Use local storage for user information and login stuff [X]
+ - Error handling [X]
+ - One more pages [X]
 
 #### Projected Features Completed:
- - User Profile Page []
+ - User Profile Page [X]
 
 # Dec 4
 #### Projected Rubric Evaluation:
