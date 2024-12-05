@@ -10,7 +10,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-emerald-200 shadow-md w-screen sticky top-0 z-10">
+    <nav className="bg-slate-300 shadow-md w-screen sticky top-0 z-10">
       {/* Navbar Header */}
       <div className="p-4 flex items-center justify-between">
         <button
@@ -45,7 +45,7 @@ const Navbar = () => {
           isOpen ? "max-h-screen" : "max-h-0 overflow-hidden"
         }`}
       >
-        <div className="flex flex-col space-y-4 p-4">
+        <div className="flex flex-col space-y-4 py-4">
           <NavItem to="/" icon="bi-house-door" text="Home" customIcon={false} />
           <NavItem to="/allMovies" icon="bi-film" text="All Movies" customIcon={false} />
           <NavItem to="/inTheatres" icon={PopcornIcon} text="In Theatres" customIcon={true} />

@@ -10,14 +10,14 @@ interface MovieCardProps {
 
 const MovieCard: FC<MovieCardProps> = ({ movie }) => {
   const navigate = useNavigate();
-  if(movie.vote_count < 10 || movie.popularity < 2 || !movie.poster_path)
+  if(movie.vote_count < 10 || movie.popularity < 2 || !movie.poster_path || !movie.title)
   {
     return
   }
 
   return (
     <div
-      className="max-w-sm rounded overflow-hidden shadow-lg bg-white transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
+      className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
       onClick={() => navigate(`/movieDetails/${movie.id}`)}
     >
       {/* Movie Poster */}
@@ -28,7 +28,7 @@ const MovieCard: FC<MovieCardProps> = ({ movie }) => {
       />
 
       {/* Movie Info */}
-      <div className="px-4 py-3">
+      <div className="px-4 py-3 bg-gray-400">
         {/* Title */}
         <h2 className="font-bold text-lg text-gray-800 truncate">
           {movie.title}

@@ -9,7 +9,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 const oidcConfig: AuthProviderProps = {
   authority: "https://auth.snowse.duckdns.org/realms/advanced-frontend/",
   client_id: "bryce-oAuth2",
-  redirect_uri: "http://localhost:5173/",
+  redirect_uri: 
+  "https://moviesearch.duckdns.org",
+  //  "http://localhost:5173/",
   onSigninCallback: () => {
     const url =
       window.location.protocol +

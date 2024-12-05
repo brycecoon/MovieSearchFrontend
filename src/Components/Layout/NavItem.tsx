@@ -8,7 +8,7 @@ interface NavItemProps {
 
 const NavItem: React.FC<NavItemProps> = ({ to, icon, text, customIcon }) => (
   <Link to={to}>
-    <div className="nav-item flex flex-row pb-2 text-emerald-900 relative group transition duration-300 ease-in-out">
+    <div className="nav-item flex flex-row pb-2 text-gray-900 relative group transition duration-300 ease-in-out">
       {customIcon ? (
         <img src={icon} className="max-w-6 min-w-6 mr-2 align-top" />
       ) : (

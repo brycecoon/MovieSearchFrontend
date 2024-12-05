@@ -13,7 +13,7 @@ const ActorCard: FC<ActorCardProps> = ({ actor }) => {
 
   return (
     <div
-      className="max-w-sm rounded overflow-hidden shadow-lg bg-white transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
+      className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
       onClick={() => navigate(`/actorDetails/${actor.id}`)} // Assuming you have a route for actor details
     >
       {/* Actor Profile Picture */}

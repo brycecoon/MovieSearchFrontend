@@ -25,7 +25,7 @@ function LoginButton() {
       <div>
         <div onClick={() => auth.removeUser()}>
           {" "}
-          <div className="nav-item flex flex-row pb-2 text-emerald-900 relative group transition duration-300 ease-in-out">
+          <div className="nav-item flex flex-row pb-2 text-gray-900 relative group transition duration-300 ease-in-out">
             <i className={`bi bi-door-closed mr-2`}></i>
             <div className="nav-text">Log Out</div>
             <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-slate-700 transition-all duration-300 ease-in-out group-hover:w-full"></span>
@@ -37,7 +37,7 @@ function LoginButton() {
 
   return (
     <div onClick={() => void auth.signinRedirect()}>
-      <div className="nav-item flex flex-row pb-2 text-emerald-900 relative group transition duration-300 ease-in-out">
+      <div className="nav-item flex flex-row pb-2 text-gray-900 relative group transition duration-300 ease-in-out">
         <i className={`bi bi-door-open mr-2`}></i>
         <div className="nav-text">Log In</div>
         <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-slate-700 transition-all duration-300 ease-in-out group-hover:w-full"></span>
