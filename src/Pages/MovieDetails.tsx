@@ -25,7 +25,7 @@ const MovieDetails = () => {
 
   return (
     <>
-      <section className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white min-h-screen px-6 py-12">
+      <section className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 min-h-screen">
         {singleMovie ? (
           <div className="min-h-screen bg-gray-100">
             {/* Header Image */}

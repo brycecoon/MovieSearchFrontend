@@ -65,14 +65,14 @@ const AllMovies = () => {
               className="flex items-center bg-gray-100 rounded-lg px-4 py-2 shadow"
             >
               <input
-                className="bg-transparent outline-none flex-1 px-2"
+                className="bg-transparent outline-none flex-1 px-2 text-gray-800"
                 placeholder="Search Movie"
                 value={inputValue}
                 onChange={handleInputChange}
               />
               <button
                 type="submit"
-                className="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition"
+                className="bg-green-700 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition font-semibold"
               >
                 Search
               </button>
@@ -80,7 +80,7 @@ const AllMovies = () => {
             <div className="relative">
               <select
                 onChange={(e) => changeSelect(Number(e.target.value))}
-                className="bg-gray-100 border border-gray-300 rounded-lg px-4 py-2 shadow focus:ring focus:ring-blue-200"
+                className="bg-gray-100 border border-gray-300 rounded-lg px-4 py-2 shadow focus:ring focus:ring-blue-200 hover:cursor-pointer text-gray-800"
               >
                 <option value="">Select Genre</option>
                 {Genres?.map((g) => (
@@ -100,16 +100,16 @@ const AllMovies = () => {
                 ))}
           </div>
         </div>
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-around items-center my-4">
           <button
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+            className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
             onClick={() => pageChange(-1)}
           >
             Previous Page
           </button>
           <div className="text-lg font-semibold">Current Page: {currPage}</div>
           <button
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+            className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
             onClick={() => pageChange(1)}
           >
             Next Page

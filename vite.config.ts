@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        // target: 'http://moviesearch.duckdns.org',
+        // target: 'https://moviesearch.duckdns.org',
         target: 'http://localhost:5152',
         changeOrigin: true,
       },

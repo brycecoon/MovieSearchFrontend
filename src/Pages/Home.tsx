@@ -61,7 +61,7 @@ const Home = () => {
         </main>
 
         {/* Footer */}
-        <footer className="bg-gray-800 text-white py-4">
+        <footer className="bg-gray-400 text-gray-800 py-4">
           <div className="container mx-auto text-center">
             <p>&copy; 2024 MovieSearch. All rights reserved.</p>
           </div>
