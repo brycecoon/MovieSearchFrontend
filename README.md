@@ -215,8 +215,8 @@ New things I'll have to do
  - 10/10 Authorized Pages and Public Pages
 
 #### Projected New Done Rubric Items:
- - one more page []
+ - one more page [X]
 
 #### Projected Features Completed:
- - Finish up Styling
- - Stretch goal if time, but I might not get to it
+ - Finish up Styling [X]
+ - Stretch goal if time, but I might not get to it []
