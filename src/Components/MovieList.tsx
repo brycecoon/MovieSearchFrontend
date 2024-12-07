@@ -48,12 +48,12 @@ const MovieList: FC<MovieListProps> = ({ list }) => {
 
   return (
     <div className="max-w-7xl mx-auto p-6 space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      <div className="sm:px-24 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
         {MovieList?.map((movie) => {
           const displayMovie = transformedMovie(movie);
           return (
             <div
-              className="relative flex flex-col items-end space-y-4 rounded-lg"
+              className="relative flex flex-col items-center space-y-4 rounded-lg"
               key={movie.id || `movie-${movie.id}`}
             >
               <CollectionMovieCard movie={displayMovie} />
@@ -66,12 +66,13 @@ const MovieList: FC<MovieListProps> = ({ list }) => {
             </div>
           );
         })}{" "}
-        <div
-          className="max-w-sm w-full rounded-lg shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer mb-4 "
-          onClick={() => navigate(`/allMovies`)}
-        >
-          <div className="relative w-full h-full bg-gray-400 opacity-30 bg-opacity-90 flex items-center justify-center rounded-lg overflow-hidden border-4 border-slate-800">
-            <img src={plusSign} className="text-slate-800 w-24 h-24" />
+        {/* add Movie Card */}
+        <div className="" onClick={() => navigate(`/allMovies`)}>
+          <div
+            className="sm:max-h-16 md:max-w-sm shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer mb-4 relative w-full  bg-gray-400 opacity-30 bg-opacity-90 flex items-center justify-center rounded-lg overflow-hidden border-4 border-slate-800  md:min-h-80"
+            onClick={() => navigate(`/allMovies`)}
+          >
+            <img src={plusSign} className="text-slate-800 w-24 h-24 " />
           </div>
         </div>
       </div>

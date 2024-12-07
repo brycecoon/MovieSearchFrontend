@@ -17,16 +17,14 @@ const CollectionMovieCard: FC<CollectionMovieCardProps> = ({ movie }) => {
 
   return (
     <div
-      className="max-w-sm w-full rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer mb-4"
+      className="relative max-w-sm w-full rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer mb-4"
       onClick={() => navigate(`/movieDetails/${movie.id}`)}
     >
-      <div className="relative w-full">
         <img
           src={`${imageBaseUrl}/${movie.poster_path}`}
           alt={movie.title}
-          className="w-full h-auto object-cover"
+          className="w-full h-auto object-cover md:min-h-80"
         />
-      </div>
     </div>
   );
 };
