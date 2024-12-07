@@ -1,4 +1,3 @@
-import React from "react";
 import { Skeleton, Box } from "@mui/material";
 
 // Skeleton Loading Component for the "Create a New List" page
