@@ -1,29 +1,17 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGetSingleMovie } from "../Functions/Queries/MovieHooks";
 import { useAddListMovie } from "../Functions/Queries/listMovieHooks";
 import { ListMovieDTO } from "../Data/DTOs/listMovieDTO";
 import { useAllLists } from "../Functions/Queries/ListHooks";
 import { useState } from "react";
-import MoviesLoadingSkeleton from "../Components/LoadingSkeletons/MoviesLoadingSkeleton";
-import { toast } from "react-toastify";
 
 const MovieDetails = () => {
   const imageBaseUrl = "https://image.tmdb.org/t/p/original";
   const { id } = useParams();
-  const {
-    data: singleMovie,
-    isLoading: singleMovieLoading,
-    isError: movieError,
-    error,
-  } = useGetSingleMovie(Number(id));
-  const {
-    data: Lists,
-    isLoading: collectionLoading,
-    isError: collectionError,
-  } = useAllLists();
+  const { data: singleMovie } = useGetSingleMovie(Number(id));
+  const { data: Lists } = useAllLists();
   const [selectedList, setSelectedList] = useState<number>(0);
   const addListMovie = useAddListMovie(selectedList);
-  const navigate = useNavigate();
 
   const addNewListMovie = () => {
     if (selectedList) {
@@ -32,18 +20,8 @@ const MovieDetails = () => {
         movieId: Number(id),
       };
       addListMovie.mutate(newListMovie);
-      navigate("/myLists");
-    } else {
-      toast.warn("Please Select A List.");
     }
   };
-
-  if (singleMovieLoading || collectionLoading) {
-    <MoviesLoadingSkeleton />;
-  }
-  if (movieError || collectionError) {
-    throw error;
-  }
 
   return (
     <>
@@ -57,7 +35,7 @@ const MovieDetails = () => {
                   singleMovie.backdrop_path || singleMovie.poster_path
                 }`}
                 alt={singleMovie.title}
-                className="h-auto w-auto "
+                className="w-full max-h-[25vh] object-cover"
               />
               <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                 <h1 className="text-4xl font-extrabold text-white drop-shadow-lg">
@@ -74,8 +52,8 @@ const MovieDetails = () => {
                   <img
                     src={`${imageBaseUrl}${singleMovie.poster_path}`}
                     alt={singleMovie.title}
-                    className="rounded-lg shadow-lg lg:max-h-[550px] object-contain"
-                    />
+                    className="rounded-lg shadow-lg"
+                  />
                 </div>
 
                 {/* Information */}
@@ -84,7 +62,7 @@ const MovieDetails = () => {
                     {singleMovie.title}
                   </h2>
                   {/* Enhanced Overview Section */}
-                  <p className=" mb-6 p-4 bg-gray-800 text-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <p className="text-gray-900 mb-6 p-4 bg-gray-800 text-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                     {singleMovie.overview}
                   </p>
 
@@ -110,7 +88,7 @@ const MovieDetails = () => {
                       {singleMovie.vote_average}/10
                     </p>
                     <p>
-                      <span className="font-bold text-gray-600">Budget: </span> 
+                      <span className="font-bold text-gray-600">Budget:</span>
                       {singleMovie.budget
                         ? `$${(singleMovie.budget / 1000000).toFixed(1)}M`
                         : "N/A"}
@@ -131,9 +109,7 @@ const MovieDetails = () => {
                         : "N/A"}
                     </p>
 
-                    {/* Add to List Section - Spanning 2 Columns */}
-                    <div className="mt-10 col-span-2">
-                      <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                    <div className="mt-10 col-span-2 flex flex-col items-center text-center">                      <h3 className="text-xl font-semibold text-gray-800 mb-4">
                         Add This Movie To A List
                       </h3>
                       <div className="flex items-center space-x-4">
