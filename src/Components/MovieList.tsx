@@ -46,19 +46,19 @@ const MovieList: FC<MovieListProps> = ({ list }) => {
   }
 
   return (
-    <div className="max-w-5xl mx-auto p-6 space-y-6">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="max-w-7xl mx-auto p-6 space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
         {MovieList?.map((movie) => {
           const displayMovie = transformedMovie(movie);
           return (
             <div
-              className="relative flex flex-col items-center space-y-4 rounded-lg "
+              className="relative flex flex-col items-end space-y-4 rounded-lg"
               key={movie.id || `movie-${movie.id}`}
             >
               <CollectionMovieCard movie={displayMovie} />
               {movie && (
                 <i
-                  className="absolute top-[-15px] right-[0px] bg-gray-300 bg-opacity-80 p-2 rounded-full bi bi-trash hover:cursor-pointer hover:scale-110 text-red-800"
+                  className="absolute top-[-10px] right-[5px] bg-gray-300 bg-opacity-80 p-2 rounded-full bi bi-trash hover:cursor-pointer hover:scale-110 text-red-800"
                   onClick={() => deleteFromList(movie.id)}
                 ></i>
               )}
@@ -66,7 +66,7 @@ const MovieList: FC<MovieListProps> = ({ list }) => {
           );
         })}{" "}
         {/* Close the map function here */}
-        <div className="text-center text-lg font-semibold flex justify-center col-span-2">
+        <div className="text-center text-lg font-semibold flex justify-center md:col-span-3 lg:col-span-5">
           <p>
             Find Movies to Add{" "}
             <a

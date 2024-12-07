@@ -1,27 +1,43 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetSingleMovie } from "../Functions/Queries/MovieHooks";
 import { useAddListMovie } from "../Functions/Queries/listMovieHooks";
 import { ListMovieDTO } from "../Data/DTOs/listMovieDTO";
 import { useAllLists } from "../Functions/Queries/ListHooks";
-import { useState } from "react";
+import { useGSelectInput } from "../Components/Generics/gSelectController";
+import MovieListSkeleton from "../Components/LoadingSkeletons/MovieListSkeleton";
+import GSelectInput from "../Components/Generics/gSelectInput";
 
 const MovieDetails = () => {
   const imageBaseUrl = "https://image.tmdb.org/t/p/original";
   const { id } = useParams();
-  const { data: singleMovie } = useGetSingleMovie(Number(id));
-  const { data: Lists } = useAllLists();
-  const [selectedList, setSelectedList] = useState<number>(0);
-  const addListMovie = useAddListMovie(selectedList);
+  const { data: singleMovie, isLoading: movieLoading,isError:movieError, error } = useGetSingleMovie(Number(id));
+  const { data: Lists, isLoading: listsLoading, isError: listError } = useAllLists();
+  const { value: selectedList, setValue: setSelectedList, options } = useGSelectInput(
+    "Select A List", 
+    Lists ? Lists : []
+  ); 
+   const addListMovie = useAddListMovie(Number(selectedList));
+   const navigate = useNavigate();
 
   const addNewListMovie = () => {
     if (selectedList) {
       const newListMovie: ListMovieDTO = {
-        listId: selectedList,
+        listId: Number(selectedList),
         movieId: Number(id),
       };
       addListMovie.mutate(newListMovie);
+      navigate("/myLists")
     }
   };
+
+  if(movieLoading || listsLoading)
+  {
+    return <MovieListSkeleton/>
+  }
+  if(movieError || listError)
+  {
+    throw error;
+  }
 
   return (
     <>
@@ -62,7 +78,7 @@ const MovieDetails = () => {
                     {singleMovie.title}
                   </h2>
                   {/* Enhanced Overview Section */}
-                  <p className="text-gray-900 mb-6 p-4 bg-gray-800 text-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <p className="mb-6 p-4 bg-gray-800 text-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                     {singleMovie.overview}
                   </p>
 
@@ -113,7 +129,7 @@ const MovieDetails = () => {
                         Add This Movie To A List
                       </h3>
                       <div className="flex items-center space-x-4">
-                        <select
+                        {/* <select
                           value={Number(selectedList)}
                           onChange={(e) =>
                             setSelectedList(Number(e.target.value))
@@ -126,7 +142,8 @@ const MovieDetails = () => {
                               {l.name}
                             </option>
                           ))}
-                        </select>
+                        </select> */}
+                        <GSelectInput control={{value:selectedList, setValue:setSelectedList, options}}/>
                         <button
                           onClick={addNewListMovie}
                           className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"

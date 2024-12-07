@@ -1,23 +1,21 @@
 import { useState } from "react";
+import { List } from "../../Data/Interfaces/List";
 
 export interface GenericSelectInputControl {
-  label: string;
   value: string;
   setValue: (value: string) => void;
-  options: string[];
+  options: List[]
 }
 
 export const useGSelectInput = (
   initialValue: string,
-  options: string[],
-  label: string
+  options: List[]
 ): GenericSelectInputControl => {
   const [value, setValue] = useState(initialValue);
 
   return {
-    label,
     value,
     setValue,
-    options,
+    options
   };
 };
