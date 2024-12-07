@@ -4,7 +4,7 @@ import { List } from "../../Data/Interfaces/List";
 export interface GenericSelectInputControl {
   value: string;
   setValue: (value: string) => void;
-  options: List[]
+  options: List[];
 }
 
 export const useGSelectInput = (

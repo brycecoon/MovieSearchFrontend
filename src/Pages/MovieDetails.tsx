@@ -6,6 +6,7 @@ import { useAllLists } from "../Functions/Queries/ListHooks";
 import { useGSelectInput } from "../Components/Generics/gSelectController";
 import MovieListSkeleton from "../Components/LoadingSkeletons/MovieListSkeleton";
 import GSelectInput from "../Components/Generics/gSelectInput";
+import { toast } from "react-toastify";
 
 const MovieDetails = () => {
   const imageBaseUrl = "https://image.tmdb.org/t/p/original";
@@ -20,13 +21,16 @@ const MovieDetails = () => {
    const navigate = useNavigate();
 
   const addNewListMovie = () => {
-    if (selectedList) {
+    if (selectedList && selectedList !== "Select A List") {
       const newListMovie: ListMovieDTO = {
         listId: Number(selectedList),
         movieId: Number(id),
       };
       addListMovie.mutate(newListMovie);
       navigate("/myLists")
+    }
+    else {
+      toast.warn("Please Select A List")
     }
   };
 
@@ -129,20 +133,6 @@ const MovieDetails = () => {
                         Add This Movie To A List
                       </h3>
                       <div className="flex items-center space-x-4">
-                        {/* <select
-                          value={Number(selectedList)}
-                          onChange={(e) =>
-                            setSelectedList(Number(e.target.value))
-                          }
-                          className="border border-gray-300 p-2 rounded-lg text-gray-800 hover:cursor-pointer"
-                        >
-                          <option value={undefined}>Select a list</option>
-                          {Lists?.map((l) => (
-                            <option key={l.id} value={l.id}>
-                              {l.name}
-                            </option>
-                          ))}
-                        </select> */}
                         <GSelectInput control={{value:selectedList, setValue:setSelectedList, options}}/>
                         <button
                           onClick={addNewListMovie}

@@ -11,6 +11,7 @@ const GSelectInput: React.FC<{
         value={control.value}
         onChange={(e) => control.setValue(e.target.value)}
       >
+        <option value="Select A List" disabled>Select A List</option>
         {control.options.map((option) => (
           <option key={option.id} value={option.id}>
             {option.name}
