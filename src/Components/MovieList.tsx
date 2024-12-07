@@ -1,12 +1,10 @@
 import { FC, useState } from "react";
-// import { useGetListOfMovies } from "../Functions/Queries/MovieHooks";
-import MovieCard from "./MovieCard";
 import { SingleMovieDetails } from "../Data/Interfaces/SingleMovie";
 import { Movie } from "../Data/Interfaces/Movie";
 import { useDeleteListMovie } from "../Functions/Queries/listMovieHooks";
 import { List } from "../Data/Interfaces/List";
-import { useDeleteList, useEditList } from "../Functions/Queries/ListHooks";
 import { useMovieListByListId } from "../Functions/Queries/MovieHooks";
+import CollectionMovieCard from "./CollectionMovieCard";
 
 interface MovieListProps {
   list: List;
@@ -35,62 +33,18 @@ const MovieList: FC<MovieListProps> = ({ list }) => {
     list.id
   );
   const deleteListMovie = useDeleteListMovie(list.id, deletedMovieId);
-  const updateList = useEditList();
-  const deleteList = useDeleteList();
-  const [updatedListName, setUpdatedListName] = useState<string | undefined>(
-    undefined
-  );
 
   const deleteFromList = (movieId: number) => {
     setdeletedMovieId(movieId);
     deleteListMovie.mutate();
   };
 
-  const deleteWholeList = (id: number) => {
-    deleteList.mutate(id);
-  };
-
-  const updateListName = () => {
-    if (updatedListName) {
-      const updatedList: List = {
-        id: list.id,
-        name: updatedListName,
-        userid: 18,
-      };
-      updateList.mutate(updatedList);
-      setUpdatedListName("");
-    }
-  };
-
   if (MovieListLoading) {
     return <div className="text-center text-lg font-semibold">...Loading</div>;
   }
 
-
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-6">
-      <div className="flex items-center gap-4">
-        <input
-          type="text"
-          placeholder="New List Name"
-          className="w-full max-w-md p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-green-200"
-          onChange={(e) => setUpdatedListName(e.target.value)}
-          value={updatedListName}
-        />
-        <button
-          className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
-          onClick={updateListName}
-        >
-          Update List Name
-        </button>
-        <button
-          className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
-          onClick={() => deleteWholeList(list.id)}
-        >
-          Delete Whole List
-        </button>
-      </div>
-
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {MovieList?.length === 0 ? (
           <div className="text-center text-lg font-semibold">
@@ -101,17 +55,15 @@ const MovieList: FC<MovieListProps> = ({ list }) => {
             const displayMovie = transformedMovie(movie);
             return (
               <div
-                className="flex flex-col items-center space-y-4 bg-white p-4 rounded-lg shadow-md"
+                className="relative flex flex-col items-center space-y-4 rounded-lg shadow-md cursor-pointer"
                 key={movie.id || `movie-${movie.id}`}
               >
-                <MovieCard movie={displayMovie} />
+                <CollectionMovieCard movie={displayMovie} />
                 {movie && (
-                  <button
-                    className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+                  <i
+                    className="absolute top-[-15px] right-[0px] bg-gray-300 bg-opacity-80 p-2 rounded-full bi bi-trash hover:cursor-pointer hover:scale-110 text-red-800"
                     onClick={() => deleteFromList(movie.id)}
-                  >
-                    Delete this movie
-                  </button>
+                  ></i>
                 )}
               </div>
             );
