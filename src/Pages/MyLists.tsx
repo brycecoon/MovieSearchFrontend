@@ -115,14 +115,14 @@ const MyLists = () => {
                     ) : (
                       <div className="flex items-center">
                         {l.name}{" "}
-                        <div className="hover:cursor-pointer hover:scale-110 text-yellow-200 relative transform scale-75 top-[-20px] right-[0px]">
+                        <div className="hover:cursor-pointer transform transition-all duration-300 hover:scale-105 text-yellow-400  relative transform scale-75 top-[-20px] right-[0px]">
                           <i
-                            className={"bi bi-pencil-square "}
+                            className="bi bi-pencil-square opacity-90"
                             onClick={() => setEditingList(l.id)}
                           ></i>
                         </div>
                         <i
-                          className={`bi bi-trash mr-2 hover:cursor-pointer hover:scale-110 text-red-700 relative top-[-20px] right-[5px] scale-75`}
+                          className={`bi bi-trash mr-2 hover:cursor-pointer transform transition-all duration-300 hover:scale-105 text-red-700 relative top-[-20px] right-[5px] scale-75`}
                           onClick={() => deleteWholeList(l.id)}
                         ></i>
                       </div>

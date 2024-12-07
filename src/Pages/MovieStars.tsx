@@ -27,7 +27,7 @@ const ActorDirector = () => {
         <h1 className="text-4xl font-extrabold tracking-wide mb-7 animate-fade-in">
           All Actors
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-0 lg:mx-32">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-8 lg:mx-16">
         {actors?.map((a) => (
             <ActorCard actor={a} key={a.id} />
           ))}

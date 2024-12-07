@@ -6,6 +6,7 @@ import { List } from "../Data/Interfaces/List";
 import { useMovieListByListId } from "../Functions/Queries/MovieHooks";
 import CollectionMovieCard from "./CollectionMovieCard";
 import { useNavigate } from "react-router-dom";
+import plusSign from "../assets/plusSign.svg";
 
 interface MovieListProps {
   list: List;
@@ -65,17 +66,13 @@ const MovieList: FC<MovieListProps> = ({ list }) => {
             </div>
           );
         })}{" "}
-        {/* Close the map function here */}
-        <div className="text-center text-lg font-semibold flex justify-center md:col-span-3 lg:col-span-5">
-          <p>
-            Find Movies to Add{" "}
-            <a
-              className="hover:cursor-pointer text-blue-600 hover:text-blue-300 hover:bg-gray-600 transition-all bg-gray-200 p-1 rounded-lg"
-              onClick={() => navigate(`/allMovies`)}
-            >
-              Here
-            </a>
-          </p>
+        <div
+          className="max-w-sm w-full rounded-lg shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer mb-4 "
+          onClick={() => navigate(`/allMovies`)}
+        >
+          <div className="relative w-full h-full bg-gray-400 opacity-30 bg-opacity-90 flex items-center justify-center rounded-lg overflow-hidden border-4 border-slate-800">
+            <img src={plusSign} className="text-slate-800 w-24 h-24" />
+          </div>
         </div>
       </div>
     </div>
