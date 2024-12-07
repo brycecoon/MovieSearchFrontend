@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetSingleMovie } from "../Functions/Queries/MovieHooks";
 import { useAddListMovie } from "../Functions/Queries/listMovieHooks";
 import { ListMovieDTO } from "../Data/DTOs/listMovieDTO";
 import { useAllLists } from "../Functions/Queries/ListHooks";
 import { useState } from "react";
 import MoviesLoadingSkeleton from "../Components/LoadingSkeletons/MoviesLoadingSkeleton";
+import { toast } from "react-toastify";
 
 const MovieDetails = () => {
   const imageBaseUrl = "https://image.tmdb.org/t/p/original";
@@ -13,6 +14,7 @@ const MovieDetails = () => {
   const { data: Lists, isLoading: collectionLoading, isError: collectionError  } = useAllLists();
   const [selectedList, setSelectedList] = useState<number>(0);
   const addListMovie = useAddListMovie(selectedList);
+  const navigate= useNavigate();
 
   const addNewListMovie = () => {
     if (selectedList) {
@@ -21,6 +23,10 @@ const MovieDetails = () => {
         movieId: Number(id),
       };
       addListMovie.mutate(newListMovie);
+      navigate("/myLists")
+    }
+    else{
+      toast.warn("Please Select A List.")
     }
   };
 
