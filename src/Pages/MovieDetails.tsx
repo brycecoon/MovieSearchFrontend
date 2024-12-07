@@ -10,11 +10,20 @@ import { toast } from "react-toastify";
 const MovieDetails = () => {
   const imageBaseUrl = "https://image.tmdb.org/t/p/original";
   const { id } = useParams();
-  const { data: singleMovie, isLoading: singleMovieLoading, isError: movieError, error } = useGetSingleMovie(Number(id));
-  const { data: Lists, isLoading: collectionLoading, isError: collectionError  } = useAllLists();
+  const {
+    data: singleMovie,
+    isLoading: singleMovieLoading,
+    isError: movieError,
+    error,
+  } = useGetSingleMovie(Number(id));
+  const {
+    data: Lists,
+    isLoading: collectionLoading,
+    isError: collectionError,
+  } = useAllLists();
   const [selectedList, setSelectedList] = useState<number>(0);
   const addListMovie = useAddListMovie(selectedList);
-  const navigate= useNavigate();
+  const navigate = useNavigate();
 
   const addNewListMovie = () => {
     if (selectedList) {
@@ -23,19 +32,16 @@ const MovieDetails = () => {
         movieId: Number(id),
       };
       addListMovie.mutate(newListMovie);
-      navigate("/myLists")
-    }
-    else{
-      toast.warn("Please Select A List.")
+      navigate("/myLists");
+    } else {
+      toast.warn("Please Select A List.");
     }
   };
 
-  if(singleMovieLoading || collectionLoading)
-  {
-    <MoviesLoadingSkeleton/>
+  if (singleMovieLoading || collectionLoading) {
+    <MoviesLoadingSkeleton />;
   }
-  if(movieError || collectionError)
-  {
+  if (movieError || collectionError) {
     throw error;
   }
 
@@ -51,7 +57,7 @@ const MovieDetails = () => {
                   singleMovie.backdrop_path || singleMovie.poster_path
                 }`}
                 alt={singleMovie.title}
-                className="w-full h-96 object-cover"
+                className="h-auto w-auto "
               />
               <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                 <h1 className="text-4xl font-extrabold text-white drop-shadow-lg">
@@ -68,8 +74,8 @@ const MovieDetails = () => {
                   <img
                     src={`${imageBaseUrl}${singleMovie.poster_path}`}
                     alt={singleMovie.title}
-                    className="rounded-lg shadow-lg"
-                  />
+                    className="rounded-lg shadow-lg lg:max-h-[550px] object-contain"
+                    />
                 </div>
 
                 {/* Information */}
@@ -78,7 +84,7 @@ const MovieDetails = () => {
                     {singleMovie.title}
                   </h2>
                   {/* Enhanced Overview Section */}
-                  <p className="text-gray-900 mb-6 p-4 bg-gray-800 text-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <p className=" mb-6 p-4 bg-gray-800 text-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                     {singleMovie.overview}
                   </p>
 
@@ -104,25 +110,21 @@ const MovieDetails = () => {
                       {singleMovie.vote_average}/10
                     </p>
                     <p>
-                      <span className="font-bold text-gray-600">Budget:</span> $
+                      <span className="font-bold text-gray-600">Budget: </span> 
                       {singleMovie.budget
-                        ? (singleMovie.budget / 1000000).toFixed(1)
+                        ? `$${(singleMovie.budget / 1000000).toFixed(1)}M`
                         : "N/A"}
-                      M
                     </p>
                     <p>
                       <span className="font-bold text-gray-600">Revenue:</span>{" "}
-                      $
                       {singleMovie.revenue
-                        ? (singleMovie.revenue / 1000000).toFixed(1)
+                        ? `$${(singleMovie.revenue / 1000000).toFixed(1)}M`
                         : "N/A"}
-                      M
                     </p>
                     <p>
                       <span className="font-bold text-gray-600">Profits:</span>{" "}
-                      $
                       {singleMovie.revenue && singleMovie.budget
-                        ? `${(
+                        ? `$${(
                             (singleMovie.revenue - singleMovie.budget) /
                             1000000
                           ).toFixed(1)}M`
@@ -130,7 +132,7 @@ const MovieDetails = () => {
                     </p>
 
                     {/* Add to List Section - Spanning 2 Columns */}
-                    <div className="mt-10 md:col-span-2">
+                    <div className="mt-10 col-span-2">
                       <h3 className="text-xl font-semibold text-gray-800 mb-4">
                         Add This Movie To A List
                       </h3>
