@@ -10,16 +10,21 @@ import {
 import MovieList from "../Components/MovieList";
 import { List } from "../Data/Interfaces/List";
 import MovieListSkeleton from "../Components/LoadingSkeletons/MovieListSkeleton";
+import { useGTextInput } from "../Components/Generics/gTextInput";
+import GTextInput from "../Components/Generics/gTextInputController";
 
 const MyLists = () => {
-  const { data: lists, isLoading: listsLoading } = useAllLists();
+  const {
+    data: lists,
+    isLoading: listsLoading,
+    isError,
+    error,
+  } = useAllLists();
   const addList = useAddList();
   const updateList = useEditList();
   const deleteList = useDeleteList();
-  const [updatedListName, setUpdatedListName] = useState<string | undefined>(
-    undefined
-  );
-  const [listName, setListName] = useState<string>("");
+  const {value:updatedListName, setValue:setUpdatedListName} = useGTextInput()
+  const { value: listName, setValue: setListName } = useGTextInput();
   const [editingList, setEditingList] = useState<number>(0);
 
   const addNewList = () => {
@@ -51,18 +56,19 @@ const MyLists = () => {
   if (listsLoading) {
     <MovieListSkeleton />;
   }
+  if (isError) {
+    throw error;
+  }
 
   return (
     <>
       <section className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white min-h-screen px-6 py-12">
         <div className="mb-6 text-center">
           <h2 className="text-3xl font-semibold mb-4">Create a New List</h2>
-          <input
-            type="text"
-            value={listName}
-            placeholder="Enter list name..."
+          <GTextInput
+            placeHolder="Enter list name..."
             className="w-full p-4 text-lg rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-300 placeholder-gray-500 transition duration-300"
-            onChange={(e) => setListName(e.target.value)}
+            control={{ value: listName, setValue: setListName }}
           />
           <button
             className="w-full mt-4 p-4 bg-green-800 text-white rounded-lg font-semibold text-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-700 transition duration-300"
@@ -88,12 +94,10 @@ const MyLists = () => {
                     {editingList == l.id ? (
                       <div className="flex items-center">
                         {" "}
-                        <input
-                          type="text"
-                          placeholder={l.name}
+                        <GTextInput
+                          placeHolder={l.name}
                           className="w-full max-w-md p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-gray-200 text-gray-800"
-                          onChange={(e) => setUpdatedListName(e.target.value)}
-                          value={updatedListName}
+                          control={{value:updatedListName,setValue:setUpdatedListName}}
                         />
                         <i
                           className={`bi bi-x hover:cursor-pointer hover:scale-110 text-red-700 relative top-[-30px] right-[5px]`}

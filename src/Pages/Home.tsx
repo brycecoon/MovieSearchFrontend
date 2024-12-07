@@ -9,7 +9,7 @@ import MoviesLoadingSkeleton from "../Components/LoadingSkeletons/MoviesLoadingS
 
 const Home = () => {
   const auth = useAuth();
-  const { data: Movies, isLoading } = useAllTrendingMovies();
+  const { data: Movies, isLoading, isError, error } = useAllTrendingMovies();
 
   useEffect(() => {
     checkIfUserExists();
@@ -18,6 +18,9 @@ const Home = () => {
 
   if (isLoading) {
     <MoviesLoadingSkeleton />;
+  }
+  if (isError) {
+    throw error;
   }
 
   async function checkIfUserExists() {
@@ -56,7 +59,7 @@ const Home = () => {
 
           {/* Movie Grid */}
           <section>
-            <h3 className="text-xl font-bold m-4 ">Movies</h3>
+            <h3 className="text-xl font-bold m-4 ">Trending Movies</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-4">
               {Movies?.map((m) => (
                 <CollectionMovieCard key={m.id} movie={m} />

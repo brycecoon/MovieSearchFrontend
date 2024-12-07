@@ -5,7 +5,7 @@ import MoviesLoadingSkeleton from "../Components/LoadingSkeletons/MoviesLoadingS
 
 const ActorDirector = () => {
   const [pageNum, setPageNum] = useState<number>(1);
-  const { data: actors, isLoading } = useGetAllActors(pageNum);
+  const { data: actors, isLoading, isError, error } = useGetAllActors(pageNum);
 
   const pageChange = (changeNum: number) => {
     if (pageNum + changeNum > 0) {
@@ -16,6 +16,10 @@ const ActorDirector = () => {
   if (isLoading) {
     <MoviesLoadingSkeleton />;
   }
+  if(isError)
+  {
+    throw error;
+  }
 
   return (
     <div>
@@ -23,8 +27,8 @@ const ActorDirector = () => {
         <h1 className="text-4xl font-extrabold tracking-wide mb-7 animate-fade-in">
           All Actors
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {actors?.map((a) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-0 lg:mx-32">
+        {actors?.map((a) => (
             <ActorCard actor={a} key={a.id} />
           ))}
         </div>

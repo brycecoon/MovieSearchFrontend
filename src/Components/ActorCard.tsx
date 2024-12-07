@@ -12,18 +12,16 @@ const ActorCard: FC<ActorCardProps> = ({ actor }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="mb-8">
+    <div
+      className="rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer mb-8"
+      onClick={() => navigate(`/actorDetails/${actor.id}`)}
+    >
       <div className="flex justify-center text-3xl mb-1">{actor.name}</div>
-      <div
-        className="rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
-        onClick={() => navigate(`/actorDetails/${actor.id}`)} // Assuming you have a route for actor details
-      >
-        <img
-          src={`${imageBaseUrl}${actor.profile_path}`}
-          alt={actor.name}
-          className="w-full h-72 object-cover"
-        />
-      </div>
+      <img
+        src={`${imageBaseUrl}${actor.profile_path}`}
+        alt={actor.name}
+        className="rounded-lg"
+      />
     </div>
   );
 };

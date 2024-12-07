@@ -4,12 +4,13 @@ import { useAddListMovie } from "../Functions/Queries/listMovieHooks";
 import { ListMovieDTO } from "../Data/DTOs/listMovieDTO";
 import { useAllLists } from "../Functions/Queries/ListHooks";
 import { useState } from "react";
+import MoviesLoadingSkeleton from "../Components/LoadingSkeletons/MoviesLoadingSkeleton";
 
 const MovieDetails = () => {
   const imageBaseUrl = "https://image.tmdb.org/t/p/original";
   const { id } = useParams();
-  const { data: singleMovie } = useGetSingleMovie(Number(id));
-  const { data: Lists } = useAllLists();
+  const { data: singleMovie, isLoading: singleMovieLoading, isError: movieError, error } = useGetSingleMovie(Number(id));
+  const { data: Lists, isLoading: collectionLoading, isError: collectionError  } = useAllLists();
   const [selectedList, setSelectedList] = useState<number>(0);
   const addListMovie = useAddListMovie(selectedList);
 
@@ -22,6 +23,15 @@ const MovieDetails = () => {
       addListMovie.mutate(newListMovie);
     }
   };
+
+  if(singleMovieLoading || collectionLoading)
+  {
+    <MoviesLoadingSkeleton/>
+  }
+  if(movieError || collectionError)
+  {
+    throw error;
+  }
 
   return (
     <>

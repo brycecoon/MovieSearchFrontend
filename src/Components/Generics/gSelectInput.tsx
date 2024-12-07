@@ -2,14 +2,12 @@ import React from "react";
 import { GenericSelectInputControl } from "./gSelectController";
 
 const GSelectInput: React.FC<{
-  label?: string;
   control: GenericSelectInputControl;
-}> = ({ label, control}) => {
+}> = ({ control }) => {
   return (
     <>
-      {label && <label className="form-label">{label}</label>}
       <select
-        className="form-control"
+        className="bg-gray-100 border border-gray-300 rounded-lg px-4 py-2 shadow focus:ring focus:ring-blue-200 hover:cursor-pointer text-gray-800"
         value={control.value}
         onChange={(e) => control.setValue(e.target.value)}
       >

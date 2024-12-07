@@ -7,20 +7,36 @@ import {
 import { useState } from "react";
 import CollectionMovieCard from "../Components/CollectionMovieCard";
 import MoviesLoadingSkeleton from "../Components/LoadingSkeletons/MoviesLoadingSkeleton";
+import { useGTextInput } from "../Components/Generics/gTextInput";
+import GTextInput from "../Components/Generics/gTextInputController";
 
 const AllMovies = () => {
   const [currPage, setCurrPage] = useState<number>(1);
   const [currGenre, setCurrGenre] = useState<number>(1);
   const [searching, setSearching] = useState<boolean>(false);
-  const [inputValue, setInputValue] = useState<string>("");
+  const { value, setValue } = useGTextInput();
   const [movieToSearch, setMovieToSearch] = useState<string>("a");
-  const { data: MoviesByPage, isLoading: isLoadingMoviesByPage } =
-    useMovieByPage(currPage);
-  const { data: GenreMovies, isLoading: isLoadingGenreMovies } =
-    useMovieByGenre(currGenre, currPage);
-  const { data: searchResults, isLoading: isLoadingSearchResults } =
-    useSearchByName(movieToSearch, currPage);
-  const { data: Genres, isLoading: isLoadingGenres } = useAllGenres();
+  const {
+    data: MoviesByPage,
+    isLoading: isLoadingMoviesByPage,
+    isError: moviesError,
+    error,
+  } = useMovieByPage(currPage);
+  const {
+    data: GenreMovies,
+    isLoading: isLoadingGenreMovies,
+    isError: genreError,
+  } = useMovieByGenre(currGenre, currPage);
+  const {
+    data: searchResults,
+    isLoading: isLoadingSearchResults,
+    isError: nameError,
+  } = useSearchByName(movieToSearch, currPage);
+  const {
+    data: Genres,
+    isLoading: isLoadingGenres,
+    isError: allGenresError,
+  } = useAllGenres();
 
   const pageChange = (changeNum: number) => {
     if (currPage + changeNum > 0) {
@@ -36,12 +52,8 @@ const AllMovies = () => {
 
   const searchForMovie = (event: React.FormEvent) => {
     event.preventDefault();
-    setMovieToSearch(inputValue);
+    setMovieToSearch(value);
     setSearching(true);
-  };
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
   };
 
   if (
@@ -51,6 +63,9 @@ const AllMovies = () => {
     isLoadingSearchResults
   ) {
     <MoviesLoadingSkeleton />;
+  }
+  if (moviesError || genreError || nameError || allGenresError) {
+    throw error;
   }
 
   return (
@@ -65,11 +80,10 @@ const AllMovies = () => {
               onSubmit={searchForMovie}
               className="flex items-center bg-gray-100 rounded-lg px-4 py-2 shadow"
             >
-              <input
+              <GTextInput
+                placeHolder="Search Movie"
                 className="bg-transparent outline-none flex-1 px-2 text-gray-800"
-                placeholder="Search Movie"
-                value={inputValue}
-                onChange={handleInputChange}
+                control={{ value, setValue }}
               />
               <button
                 type="submit"

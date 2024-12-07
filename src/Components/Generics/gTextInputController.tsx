@@ -1,23 +1,22 @@
 import { GenericTextInputControl } from "./gTextInput";
 
-const gTextInput: React.FC<{
-  label?: string;
+const GTextInput: React.FC<{
+  placeHolder: string;
   control: GenericTextInputControl;
-}> = ({ label, control }) => {
+  className: string;
+}> = ({ className, placeHolder, control }) => {
   return (
     <>
-    <div className="mb-3">
-      <label className="form-label">{label}</label>
       <input
         type="text"
-        className="form-control"
+        placeholder={placeHolder}
+        className={className}
         value={control.value}
         onChange={(e) => {
           control.setValue(e.target.value);
         }}
       />
-      </div>
     </>
   );
 };
-export default gTextInput;
+export default GTextInput;

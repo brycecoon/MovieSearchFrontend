@@ -22,7 +22,7 @@ const checkIfAuthorized = async (
 };
 
 const AdminPage = () => {
-  const { data: users, isLoading } = useAllUsers(); // Assuming `useAllUsers` returns `isLoading`
+  const { data: users, isLoading, isError, error } = useAllUsers(); // Assuming `useAllUsers` returns `isLoading`
   const auth = useAuth();
   const navigate = useNavigate();
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
@@ -38,6 +38,9 @@ const AdminPage = () => {
 
   if (isLoading) {
     return <AdminLoadingSkeleton />;
+  }
+  if (isError) {
+    throw error;
   }
 
   if (!isAuthorized) {

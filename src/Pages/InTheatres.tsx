@@ -3,11 +3,13 @@ import CollectionMovieCard from "../Components/CollectionMovieCard";
 import MoviesLoadingSkeleton from "../Components/LoadingSkeletons/MoviesLoadingSkeleton";
 
 const InTheatres = () => {
-  const { data: Movies, isLoading } = useAllMoviesNowPlaying();
+  const { data: Movies, isLoading, isError, error } = useAllMoviesNowPlaying();
 
-  if(isLoading)
-  {
+  if (isLoading) {
     <MoviesLoadingSkeleton />;
+  }
+  if (isError) {
+    throw error;
   }
 
   return (
@@ -19,7 +21,8 @@ const InTheatres = () => {
             Lights, Camera, Action! 🎬
           </h1>
           <p className="text-lg font-light text-gray-300">
-            Grab your popcorn and check out the latest hits lighting up the big screen!
+            Grab your popcorn and check out the latest hits lighting up the big
+            screen!
           </p>
         </div>
 

@@ -24,13 +24,48 @@ const Navbar = () => {
         {/* Desktop Links */}
         <div className="hidden md:flex space-x-4">
           <NavItem to="/" icon="bi-house-door" text="Home" customIcon={false} />
-          <NavItem to="/allMovies" icon="bi-film" text="All Movies" customIcon={false} />
-          <NavItem to="/inTheatres" icon={PopcornIcon} text="In Theatres" customIcon={true} />
-          <NavItem to="/myLists" icon={listIcon} text="My Lists" customIcon={true} />
-          <NavItem to="/actordirector" icon={movieStarIcon} text="Movie Stars" customIcon={true} />
-          <NavItem to="/movieFacts" icon={factsIcon} text="Movie Facts" customIcon={true} />
-          <NavItem to="/adminpage" icon="bi-person-badge" text="Admin" customIcon={false} />
-          <NavItem to="/userProfile" icon="bi-person-circle" text="My Profile" customIcon={false} />
+          <NavItem
+            to="/allMovies"
+            icon="bi-film"
+            text="All Movies"
+            customIcon={false}
+          />
+          <NavItem
+            to="/inTheatres"
+            icon={PopcornIcon}
+            text="In Theatres"
+            customIcon={true}
+          />
+          <NavItem
+            to="/myLists"
+            icon={listIcon}
+            text="My Lists"
+            customIcon={true}
+          />
+          <NavItem
+            to="/actordirector"
+            icon={movieStarIcon}
+            text="Movie Stars"
+            customIcon={true}
+          />
+          <NavItem
+            to="/movieFacts"
+            icon={factsIcon}
+            text="Movie Facts"
+            customIcon={true}
+          />
+          <NavItem
+            to="/adminpage"
+            icon="bi-person-badge"
+            text="Admin"
+            customIcon={false}
+          />
+          <NavItem
+            to="/userProfile"
+            icon="bi-person-circle"
+            text="My Profile"
+            customIcon={false}
+          />
         </div>
 
         {/* Login Button */}
@@ -41,19 +76,62 @@ const Navbar = () => {
 
       {/* Mobile Links */}
       <div
-        className={`md:hidden transition-all duration-300 ${
-          isOpen ? "max-h-screen" : "max-h-0 overflow-hidden"
+        className={`md:hidden transition-all duration-300 ease-in-out ${
+          isOpen
+            ? "max-h-screen opacity-100 visible" // make it visible and fully opaque when open
+            : "max-h-0 opacity-0 invisible" // make it invisible and hidden when closed
         }`}
       >
-        <div className="flex flex-col space-y-4 py-4 pl-5">
+        <div
+          className="flex flex-col space-y-4 py-4 pl-5"
+          onClick={() => {
+            setIsOpen(!isOpen);
+            window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to the top smoothly
+          }}
+        >
           <NavItem to="/" icon="bi-house-door" text="Home" customIcon={false} />
-          <NavItem to="/allMovies" icon="bi-film" text="All Movies" customIcon={false} />
-          <NavItem to="/inTheatres" icon={PopcornIcon} text="In Theatres" customIcon={true} />
-          <NavItem to="/myLists" icon={listIcon} text="My Lists" customIcon={true} />
-          <NavItem to="/actordirector" icon={movieStarIcon} text="Movie Stars" customIcon={true} />
-          <NavItem to="/movieFacts" icon={factsIcon} text="Movie Facts" customIcon={true} />
-          <NavItem to="/adminpage" icon="bi-person-badge" text="Admin" customIcon={false} />
-          <NavItem to="/userProfile" icon="bi-person-circle" text="My Profile" customIcon={false} />
+          <NavItem
+            to="/allMovies"
+            icon="bi-film"
+            text="All Movies"
+            customIcon={false}
+          />
+          <NavItem
+            to="/inTheatres"
+            icon={PopcornIcon}
+            text="In Theatres"
+            customIcon={true}
+          />
+          <NavItem
+            to="/myLists"
+            icon={listIcon}
+            text="My Lists"
+            customIcon={true}
+          />
+          <NavItem
+            to="/actordirector"
+            icon={movieStarIcon}
+            text="Movie Stars"
+            customIcon={true}
+          />
+          <NavItem
+            to="/movieFacts"
+            icon={factsIcon}
+            text="Movie Facts"
+            customIcon={true}
+          />
+          <NavItem
+            to="/adminpage"
+            icon="bi-person-badge"
+            text="Admin"
+            customIcon={false}
+          />
+          <NavItem
+            to="/userProfile"
+            icon="bi-person-circle"
+            text="My Profile"
+            customIcon={false}
+          />
         </div>
       </div>
     </nav>
