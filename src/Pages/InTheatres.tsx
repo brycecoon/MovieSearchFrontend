@@ -1,12 +1,18 @@
 import { useAllMoviesNowPlaying } from "../Functions/Queries/MovieHooks";
-import MovieCard from "../Components/MovieCard";
+import CollectionMovieCard from "../Components/CollectionMovieCard";
+import MoviesLoadingSkeleton from "../Components/LoadingSkeletons/MoviesLoadingSkeleton";
 
 const InTheatres = () => {
-  const { data: Movies } = useAllMoviesNowPlaying();
+  const { data: Movies, isLoading } = useAllMoviesNowPlaying();
+
+  if(isLoading)
+  {
+    <MoviesLoadingSkeleton />;
+  }
 
   return (
     <>
-      <section className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white min-h-screen px-6 py-12">
+      <section className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white min-h-screen px-12 py-12">
         {/* Dynamic Banner */}
         <div className="mb-8 text-center">
           <h1 className="text-4xl font-extrabold tracking-wide mb-4 animate-fade-in">
@@ -20,7 +26,7 @@ const InTheatres = () => {
         {/* Movie Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 animate-slide-in">
           {Movies?.map((m) => (
-            <MovieCard key={m.id} movie={m} />
+            <CollectionMovieCard key={m.id} movie={m} />
           ))}
         </div>
 

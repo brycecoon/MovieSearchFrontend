@@ -5,7 +5,8 @@ import {
   useSearchByName,
 } from "../Functions/Queries/MovieHooks";
 import { useState } from "react";
-import MovieCard from "../Components/MovieCard";
+import CollectionMovieCard from "../Components/CollectionMovieCard";
+import MoviesLoadingSkeleton from "../Components/LoadingSkeletons/MoviesLoadingSkeleton";
 
 const AllMovies = () => {
   const [currPage, setCurrPage] = useState<number>(1);
@@ -49,7 +50,7 @@ const AllMovies = () => {
     isLoadingGenres ||
     isLoadingSearchResults
   ) {
-    return <div>Loading...</div>;
+    <MoviesLoadingSkeleton />;
   }
 
   return (
@@ -92,24 +93,26 @@ const AllMovies = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 m-4">
             {searching
-              ? searchResults?.map((m) => <MovieCard key={m.id} movie={m} />)
+              ? searchResults?.map((m) => (
+                  <CollectionMovieCard key={m.id} movie={m} />
+                ))
               : (GenreMovies?.length ? GenreMovies : MoviesByPage)?.map((m) => (
-                  <MovieCard key={m.id} movie={m} />
+                  <CollectionMovieCard key={m.id} movie={m} />
                 ))}
           </div>
         </div>
-        <div className="flex justify-around items-center my-4">
+        <div className="flex justify-center items-center my-4">
           <button
-            className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+            className="bg-emerald-700 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition"
             onClick={() => pageChange(-1)}
           >
             Previous Page
           </button>
-          <div className="text-lg font-semibold">Current Page: {currPage}</div>
+          <div className="text-lg font-semibold mx-6">Page: {currPage}</div>
           <button
-            className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+            className="bg-emerald-700 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition"
             onClick={() => pageChange(1)}
           >
             Next Page

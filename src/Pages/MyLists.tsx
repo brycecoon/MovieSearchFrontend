@@ -9,6 +9,7 @@ import {
 
 import MovieList from "../Components/MovieList";
 import { List } from "../Data/Interfaces/List";
+import MovieListSkeleton from "../Components/LoadingSkeletons/MovieListSkeleton";
 
 const MyLists = () => {
   const { data: lists, isLoading: listsLoading } = useAllLists();
@@ -48,7 +49,7 @@ const MyLists = () => {
   };
 
   if (listsLoading) {
-    return <div>...Loading</div>;
+    <MovieListSkeleton />;
   }
 
   return (
@@ -78,7 +79,10 @@ const MyLists = () => {
         <div>
           {lists?.map((l) => (
             <div key={l.id} className="w-full ">
-              <div key={l.id} className="bg-slate-500 rounded-lg shadow-lg shadow-gray-700">
+              <div
+                key={l.id}
+                className="bg-slate-500 rounded-lg shadow-lg shadow-gray-700"
+              >
                 <div className="text-3xl pt-7 pb-3 bg-black text-white flex pl-5 capitalize font-semibold rounded-t-lg mt-5 shadow-[0_4px_10px_2px_rgba(0,0,0,0.5)]">
                   <div className="flex items-center gap-4">
                     {editingList == l.id ? (

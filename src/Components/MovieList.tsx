@@ -5,6 +5,7 @@ import { useDeleteListMovie } from "../Functions/Queries/listMovieHooks";
 import { List } from "../Data/Interfaces/List";
 import { useMovieListByListId } from "../Functions/Queries/MovieHooks";
 import CollectionMovieCard from "./CollectionMovieCard";
+import { useNavigate } from "react-router-dom";
 
 interface MovieListProps {
   list: List;
@@ -33,6 +34,7 @@ const MovieList: FC<MovieListProps> = ({ list }) => {
     list.id
   );
   const deleteListMovie = useDeleteListMovie(list.id, deletedMovieId);
+  const navigate = useNavigate();
 
   const deleteFromList = (movieId: number) => {
     setdeletedMovieId(movieId);
@@ -48,7 +50,15 @@ const MovieList: FC<MovieListProps> = ({ list }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {MovieList?.length === 0 ? (
           <div className="text-center text-lg font-semibold">
-            No movies found.
+            <p>
+              Find Movies to Add{" "}
+              <a
+                className="hover:cursor-pointer text-blue-600 hover:text-blue-300 hover:bg-gray-600 transition-all bg-gray-200 p-1 rounded-lg"
+                onClick={() => navigate(`/allMovies`)}
+              >
+                Here
+              </a>
+            </p>
           </div>
         ) : (
           MovieList?.map((movie) => {

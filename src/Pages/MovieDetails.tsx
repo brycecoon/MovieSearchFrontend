@@ -27,7 +27,7 @@ const MovieDetails = () => {
     <>
       <section className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 min-h-screen">
         {singleMovie ? (
-          <div className="min-h-screen bg-gray-100">
+          <div className="min-h-screen bg-gray-800">
             {/* Header Image */}
             <div className="relative">
               <img
@@ -45,14 +45,14 @@ const MovieDetails = () => {
             </div>
 
             {/* Movie Details Section */}
-            <div className="container mx-auto px-6 py-10 ">
+            <div className="container mx-auto px-6 py-10">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {/* Poster */}
                 <div className="flex justify-center">
                   <img
                     src={`${imageBaseUrl}${singleMovie.poster_path}`}
                     alt={singleMovie.title}
-                    className="w-64 rounded-lg shadow-lg"
+                    className="rounded-lg shadow-lg"
                   />
                 </div>
 
@@ -61,7 +61,10 @@ const MovieDetails = () => {
                   <h2 className="text-2xl font-bold text-gray-600 mb-4">
                     {singleMovie.title}
                   </h2>
-                  <p className="text-gray-900 mb-6">{singleMovie.overview}</p>
+                  {/* Enhanced Overview Section */}
+                  <p className="text-gray-900 mb-6 p-4 bg-gray-800 text-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    {singleMovie.overview}
+                  </p>
 
                   <div className="grid grid-cols-2 gap-4">
                     <p>
@@ -84,8 +87,34 @@ const MovieDetails = () => {
                       <span className="font-bold text-gray-600">Rating:</span>{" "}
                       {singleMovie.vote_average}/10
                     </p>
-                    {/* Add to List Section */}
-                    <div className="mt-10">
+                    <p>
+                      <span className="font-bold text-gray-600">Budget:</span> $
+                      {singleMovie.budget
+                        ? (singleMovie.budget / 1000000).toFixed(1)
+                        : "N/A"}
+                      M
+                    </p>
+                    <p>
+                      <span className="font-bold text-gray-600">Revenue:</span>{" "}
+                      $
+                      {singleMovie.revenue
+                        ? (singleMovie.revenue / 1000000).toFixed(1)
+                        : "N/A"}
+                      M
+                    </p>
+                    <p>
+                      <span className="font-bold text-gray-600">Profits:</span>{" "}
+                      $
+                      {singleMovie.revenue && singleMovie.budget
+                        ? `${(
+                            (singleMovie.revenue - singleMovie.budget) /
+                            1000000
+                          ).toFixed(1)}M`
+                        : "N/A"}
+                    </p>
+
+                    {/* Add to List Section - Spanning 2 Columns */}
+                    <div className="mt-10 md:col-span-2">
                       <h3 className="text-xl font-semibold text-gray-800 mb-4">
                         Add This Movie To A List
                       </h3>
@@ -95,7 +124,7 @@ const MovieDetails = () => {
                           onChange={(e) =>
                             setSelectedList(Number(e.target.value))
                           }
-                          className="border border-gray-300 p-2 rounded-lg"
+                          className="border border-gray-300 p-2 rounded-lg text-gray-800 hover:cursor-pointer"
                         >
                           <option value={undefined}>Select a list</option>
                           {Lists?.map((l) => (

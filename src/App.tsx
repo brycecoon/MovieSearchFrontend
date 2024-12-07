@@ -13,7 +13,7 @@ import MovieDetails from "./Pages/MovieDetails";
 import MyLists from "./Pages/MyLists";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ActorDirector from "./Pages/ActorDirector";
+import ActorDirector from "./Pages/MovieStars";
 import ActorDetails from "./Pages/ActorDetails";
 import FunMovieFacts from "./Pages/FunMovieFacts";
 import UserProfile from "./Pages/UserProfile";

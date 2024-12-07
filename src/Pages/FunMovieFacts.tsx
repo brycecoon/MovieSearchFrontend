@@ -2,9 +2,8 @@ import { facts } from "../Data/movieFactsData";
 
 const FunMovieFacts = () => {
   return (
-    <section className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white min-h-screen px-6 py-12">
-      <div className=" bg-gray-100 text-gray-800">
-        {/* Header Section */}
+    <section className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white min-h-screen">
+      <div className=" bg-gray-800 text-gray-800">
         <header className="bg-black text-white py-6 text-center">
           <h1 className="text-5xl font-bold">Fun Movie Facts</h1>
           <p className="text-xl mt-2">
@@ -18,7 +17,7 @@ const FunMovieFacts = () => {
           {facts.map((fact, index) => (
             <div
               key={fact.title}
-              className="bg-stone-200 px-10 py-7 my-3 rounded-md"
+              className="bg-slate-600 text-gray-200 px-10 py-7 my-3 rounded-md"
             >
               <h2 className="flex justify-center text-4xl font-semibold mb-10">
                 {index + 1}. {fact.title}
