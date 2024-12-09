@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useAuth } from "react-oidc-context";
-import { callAuthEndpoint } from "../AuthStuff/services/UserService";
 import { AddUser, getUserByEmail } from "../Functions/UserRequests";
 import { UserDTO } from "../Data/DTOs/userDTO";
 import { useAllTrendingMovies } from "../Functions/Queries/MovieHooks";
@@ -25,20 +24,24 @@ const Home = () => {
 
   async function checkIfUserExists() {
     if (auth.user && auth.user.id_token) {
-      const currUserEmail = await callAuthEndpoint(auth.user.id_token);
-      const currUser = await getUserByEmail(currUserEmail);
+      if (auth.user.profile.email) {
+        const currUser = await getUserByEmail(auth.user.profile.email);
 
-      if (!currUser) {
-        const newUser: UserDTO = {
-          email: currUserEmail,
-          name: currUserEmail,
-          biography: "",
-          roleid: 1,
-        };
-        await AddUser(newUser);
+        //if no current user then create one
+        if (!currUser && auth.user.profile.email) {
+          const newUser: UserDTO = {
+            name: auth.user.profile.name || auth.user.profile.email,
+            email: auth.user.profile.email,
+            biography: "",
+            roleId: 1,
+          };
+          await AddUser(newUser);
+          const newCurrUser = await getUserByEmail(auth.user.profile.email);
+          localStorage.setItem("currentUser", JSON.stringify(newCurrUser));
+        } else {
+          localStorage.setItem("currentUser", JSON.stringify(currUser));
+        }
       }
-      const savedUser = await getUserByEmail(currUserEmail);
-      localStorage.setItem("currentUser", JSON.stringify(savedUser));
     }
   }
 

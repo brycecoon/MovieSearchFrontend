@@ -2,8 +2,8 @@ import axios from "axios";
 import { List } from "../Data/Interfaces/List";
 import { listDTO } from "../Data/DTOs/listDTO";
 
-export const getLists = async (): Promise<List[]> => {
-  const response = await axios.get(`/api/list/getAll`);
+export const getLists = async (userId: number): Promise<List[]> => {
+  const response = await axios.get(`/api/list/getAll/${userId}`)
   return response.data;
 };
 

@@ -3,10 +3,10 @@ import { queryKeyFactory } from "./QueryKeyFactory";
 import { addList, deleteList, editList, getLists } from "../ListRequests";
 import { toast } from "react-toastify";
 
-export const useAllLists = () => {
+export const useAllLists = (userId: number) => {
   return useQuery({
     queryKey: queryKeyFactory.lists(),
-    queryFn: getLists,
+    queryFn: () => getLists(userId),
   });
 };
 

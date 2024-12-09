@@ -8,13 +8,11 @@ export const getAllUsers = async (): Promise<User[]> => {
 };
 
 export const AddUser = async (newUser: UserDTO) => {
-  await axios.post("/api/user/add", newUser, {
-    headers: { "Content-Type": "application/json", },
-  });
+  await axios.post("/api/user/add", newUser);
 };
 
 export const getUserByEmail = async (email: string): Promise<User> => {
-  const response = await axios.get("/api/user/getbyemail", {
+  const response = await axios.get("/api/user/getByEmail", {
     params: { email },
   });
   return response.data;

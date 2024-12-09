@@ -14,16 +14,18 @@ import { useGTextInput } from "../Components/Generics/gTextInput";
 import GTextInput from "../Components/Generics/gTextInputController";
 
 const MyLists = () => {
+  const currUser = localStorage.getItem("currentUser");
   const {
     data: lists,
     isLoading: listsLoading,
     isError,
     error,
-  } = useAllLists();
+  } = useAllLists(currUser ? JSON.parse(currUser).id : 0);
   const addList = useAddList();
   const updateList = useEditList();
   const deleteList = useDeleteList();
-  const {value:updatedListName, setValue:setUpdatedListName} = useGTextInput()
+  const { value: updatedListName, setValue: setUpdatedListName } =
+    useGTextInput();
   const { value: listName, setValue: setListName } = useGTextInput();
   const [editingList, setEditingList] = useState<number>(0);
 
@@ -60,6 +62,15 @@ const MyLists = () => {
     throw error;
   }
 
+  if (!currUser) {
+    return (
+      <section className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white min-h-screen px-6 py-12 flex items-center justify-center">
+        <div className="text-3xl font-semibold">
+          Please Log In To View and Change Your Lists.
+        </div>
+      </section>
+    );
+  }
   return (
     <>
       <section className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white min-h-screen px-6 py-12">
@@ -83,6 +94,11 @@ const MyLists = () => {
           </h2>
         </section>
         <div>
+          {lists && lists.length === 0 ? (
+            <div className="flex justify-center items-center w-full py-6 mt-6 bg-gray-800 text-lg font-semibold text-gray-400 border border-gray-700 rounded-lg shadow-lg animate-fadeIn">
+              <span>No Lists Created Yet</span>
+            </div>
+          ) : null}
           {lists?.map((l) => (
             <div key={l.id} className="w-full ">
               <div
@@ -97,7 +113,10 @@ const MyLists = () => {
                         <GTextInput
                           placeHolder={l.name}
                           className="w-full max-w-md p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-gray-200 text-gray-800"
-                          control={{value:updatedListName,setValue:setUpdatedListName}}
+                          control={{
+                            value: updatedListName,
+                            setValue: setUpdatedListName,
+                          }}
                         />
                         <i
                           className={`bi bi-x hover:cursor-pointer hover:scale-110 text-red-700 relative top-[-30px] right-[5px]`}

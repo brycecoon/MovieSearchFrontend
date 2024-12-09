@@ -23,7 +23,12 @@ function LoginButton() {
   if (auth.isAuthenticated) {
     return (
       <div>
-        <div onClick={() => auth.removeUser()}>
+        <div
+          onClick={() => {
+            auth.removeUser();
+            localStorage.removeItem("currentUser");
+          }}
+        >
           {" "}
           <div className="nav-item flex flex-row pb-2 text-gray-900 relative group transition duration-300 ease-in-out">
             <i className={`bi bi-door-closed mr-2`}></i>

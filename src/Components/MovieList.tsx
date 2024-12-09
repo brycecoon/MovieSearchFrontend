@@ -67,7 +67,13 @@ const MovieList: FC<MovieListProps> = ({ list }) => {
           );
         })}{" "}
         {/* add Movie Card */}
-        <div className="" onClick={() => navigate(`/allMovies`)}>
+        <div
+          className=""
+          onClick={() => {
+            navigate(`/allMovies`);
+            window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to the top smoothly
+          }}
+        >
           <div
             className="sm:max-h-16 md:max-w-sm shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer mb-4 relative w-full  bg-gray-400 opacity-30 bg-opacity-90 flex items-center justify-center rounded-lg overflow-hidden border-4 border-slate-800  md:min-h-80"
             onClick={() => navigate(`/allMovies`)}

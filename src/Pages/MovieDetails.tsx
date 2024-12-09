@@ -11,14 +11,25 @@ import { toast } from "react-toastify";
 const MovieDetails = () => {
   const imageBaseUrl = "https://image.tmdb.org/t/p/original";
   const { id } = useParams();
-  const { data: singleMovie, isLoading: movieLoading,isError:movieError, error } = useGetSingleMovie(Number(id));
-  const { data: Lists, isLoading: listsLoading, isError: listError } = useAllLists();
-  const { value: selectedList, setValue: setSelectedList, options } = useGSelectInput(
-    "Select A List", 
-    Lists ? Lists : []
-  ); 
-   const addListMovie = useAddListMovie(Number(selectedList));
-   const navigate = useNavigate();
+  const {
+    data: singleMovie,
+    isLoading: movieLoading,
+    isError: movieError,
+    error,
+  } = useGetSingleMovie(Number(id));
+  const currUser = localStorage.getItem("currentUser");
+  const {
+    data: Lists,
+    isLoading: listsLoading,
+    isError: listError,
+  } = useAllLists(currUser ? JSON.parse(currUser).id : 0);
+  const {
+    value: selectedList,
+    setValue: setSelectedList,
+    options,
+  } = useGSelectInput("Select A List", Lists ? Lists : []);
+  const addListMovie = useAddListMovie(Number(selectedList));
+  const navigate = useNavigate();
 
   const addNewListMovie = () => {
     if (selectedList && selectedList !== "Select A List") {
@@ -27,19 +38,16 @@ const MovieDetails = () => {
         movieId: Number(id),
       };
       addListMovie.mutate(newListMovie);
-      navigate("/myLists")
-    }
-    else {
-      toast.warn("Please Select A List")
+      navigate("/myLists");
+    } else {
+      toast.warn("Please Select A List");
     }
   };
 
-  if(movieLoading || listsLoading)
-  {
-    return <MovieListSkeleton/>
+  if (movieLoading || listsLoading) {
+    return <MovieListSkeleton />;
   }
-  if(movieError || listError)
-  {
+  if (movieError || listError) {
     throw error;
   }
 
@@ -89,7 +97,7 @@ const MovieDetails = () => {
                   <div className="grid grid-cols-2 gap-4">
                     <p>
                       <span className="font-bold text-gray-600">
-                        Release Date:
+                        Release Date:{" "}
                       </span>
                       {singleMovie.release_date}
                     </p>
@@ -129,19 +137,35 @@ const MovieDetails = () => {
                         : "N/A"}
                     </p>
 
-                    <div className="mt-10 col-span-2 flex flex-col items-center text-center">                      <h3 className="text-xl font-semibold text-gray-800 mb-4">
-                        Add This Movie To A List
-                      </h3>
-                      <div className="flex items-center space-x-4">
-                        <GSelectInput control={{value:selectedList, setValue:setSelectedList, options}}/>
-                        <button
-                          onClick={addNewListMovie}
-                          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
-                        >
-                          Add
-                        </button>
+                    {!currUser ? (
+                      <div className="mt-10 col-span-2 flex flex-col items-center text-center">
+                        <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                          {" "}
+                          <em>Please Log In To Add This Movie To A List</em>
+                        </h3>
                       </div>
-                    </div>
+                    ) : (
+                      <div className="mt-10 col-span-2 flex flex-col items-center text-center">
+                        <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                          Add This Movie To A List
+                        </h3>
+                        <div className="flex items-center space-x-4">
+                          <GSelectInput
+                            control={{
+                              value: selectedList,
+                              setValue: setSelectedList,
+                              options,
+                            }}
+                          />
+                          <button
+                            onClick={addNewListMovie}
+                            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+                          >
+                            Add
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

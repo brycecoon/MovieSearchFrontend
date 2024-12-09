@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { User } from "../Data/Interfaces/User";
 import { editUser } from "../Functions/UserRequests";
+import { toast } from "react-toastify";
 
 const UserProfile = () => {
   const currUser = localStorage.getItem("currentUser");
@@ -11,7 +12,9 @@ const UserProfile = () => {
   if (!currUser) {
     return (
       <section className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white min-h-screen px-6 py-12 flex items-center justify-center">
-        <div className="text-3xl font-semibold">Please Log In To View Your Profile.</div>
+        <div className="text-3xl font-semibold">
+          Please Log In To View Your Profile.
+        </div>
       </section>
     );
   }
@@ -20,13 +23,14 @@ const UserProfile = () => {
 
   const handleEditUser = () => {
     if (!userBiography.trim()) {
-      return; 
+      return;
     }
     const updatedUser: User = {
       ...parsedUser,
       biography: userBiography.trim(),
     };
-    editUser(updatedUser); // Call the API function to save changes
+    editUser(updatedUser);
+    toast.warn("Changes Saved, Log out then log back in to see changes");
   };
 
   return (
@@ -75,6 +79,12 @@ const UserProfile = () => {
             Set Biography
           </button>
         </div>
+      </div>
+      <div className="m-5 flex items-center justify-center">
+        <em>
+          *This page is just to use local storage so it doesn't automatically
+          update
+        </em>
       </div>
     </section>
   );
