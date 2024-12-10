@@ -22,35 +22,35 @@ const Home = () => {
     throw error;
   }
 
-  //For Devolopment if not close to keycloak
-  async function checkIfUserExists() {
-        const currUser = await getUserByEmail("brycegcoon@gmail.com");
-        localStorage.setItem("currentUser", JSON.stringify(currUser));
-      
-  }
-
+  //For Development if keycloak not available
   // async function checkIfUserExists() {
-  //   if (auth.user && auth.user.id_token) {
-  //     if (auth.user.profile.email) {
-  //       const currUser = await getUserByEmail(auth.user.profile.email);
+  //       const currUser = await getUserByEmail("brycegcoon@gmail.com");
+  //       localStorage.setItem("currentUser", JSON.stringify(currUser));
 
-  //       //if no current user then create one
-  //       if (!currUser && auth.user.profile.email) {
-  //         const newUser: UserDTO = {
-  //           name: auth.user.profile.name || auth.user.profile.email,
-  //           email: auth.user.profile.email,
-  //           biography: "",
-  //           roleId: 1,
-  //         };
-  //         await AddUser(newUser);
-  //         const newCurrUser = await getUserByEmail(auth.user.profile.email);
-  //         localStorage.setItem("currentUser", JSON.stringify(newCurrUser));
-  //       } else {
-  //         localStorage.setItem("currentUser", JSON.stringify(currUser));
-  //       }
-  //     }
-  //   }
   // }
+
+  async function checkIfUserExists() {
+    if (auth.user && auth.user.id_token) {
+      if (auth.user.profile.email) {
+        const currUser = await getUserByEmail(auth.user.profile.email);
+
+        //if no current user then create one
+        if (!currUser && auth.user.profile.email) {
+          const newUser: UserDTO = {
+            name: auth.user.profile.name || auth.user.profile.email,
+            email: auth.user.profile.email,
+            biography: "",
+            roleId: 1,
+          };
+          await AddUser(newUser);
+          const newCurrUser = await getUserByEmail(auth.user.profile.email);
+          localStorage.setItem("currentUser", JSON.stringify(newCurrUser));
+        } else {
+          localStorage.setItem("currentUser", JSON.stringify(currUser));
+        }
+      }
+    }
+  }
 
   return (
     <section className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white min-h-screen">
@@ -70,10 +70,12 @@ const Home = () => {
           {/* Movie Grid */}
           <section>
             <h3 className="text-xl font-bold m-4 ">Trending Movies</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mx-4">
-              {Movies?.map((m) => (
-                <CollectionMovieCard key={m.id} movie={m} />
-              ))}
+            <div className="flex justify-center">
+              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mx-4">
+                {Movies?.map((m) => (
+                  <CollectionMovieCard key={m.id} movie={m} />
+                ))}
+              </div>
             </div>
           </section>
         </main>
