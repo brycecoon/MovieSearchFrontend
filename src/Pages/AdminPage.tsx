@@ -12,7 +12,16 @@ const AdminPage = () => {
     throw error;
   }
 
-  if (currentUser && (JSON.parse(currentUser).roleId) != 2) {
+  if (!currentUser) {
+    return (
+      <section className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white min-h-screen px-6 py-12 flex items-center justify-center">
+        <div className="text-3xl font-semibold">
+          Please Log In As Admin to View Admin Dashboard
+        </div>
+      </section>
+    );
+  }
+  else if (currentUser && (JSON.parse(currentUser).roleId) != 2) {
     return (
       <section className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white min-h-screen px-6 py-12 flex items-center justify-center">
         <div className="text-3xl font-semibold">

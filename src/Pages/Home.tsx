@@ -22,28 +22,35 @@ const Home = () => {
     throw error;
   }
 
+  //For Devolopment if not close to keycloak
   async function checkIfUserExists() {
-    if (auth.user && auth.user.id_token) {
-      if (auth.user.profile.email) {
-        const currUser = await getUserByEmail(auth.user.profile.email);
-
-        //if no current user then create one
-        if (!currUser && auth.user.profile.email) {
-          const newUser: UserDTO = {
-            name: auth.user.profile.name || auth.user.profile.email,
-            email: auth.user.profile.email,
-            biography: "",
-            roleId: 1,
-          };
-          await AddUser(newUser);
-          const newCurrUser = await getUserByEmail(auth.user.profile.email);
-          localStorage.setItem("currentUser", JSON.stringify(newCurrUser));
-        } else {
-          localStorage.setItem("currentUser", JSON.stringify(currUser));
-        }
-      }
-    }
+        const currUser = await getUserByEmail("brycegcoon@gmail.com");
+        localStorage.setItem("currentUser", JSON.stringify(currUser));
+      
   }
+
+  // async function checkIfUserExists() {
+  //   if (auth.user && auth.user.id_token) {
+  //     if (auth.user.profile.email) {
+  //       const currUser = await getUserByEmail(auth.user.profile.email);
+
+  //       //if no current user then create one
+  //       if (!currUser && auth.user.profile.email) {
+  //         const newUser: UserDTO = {
+  //           name: auth.user.profile.name || auth.user.profile.email,
+  //           email: auth.user.profile.email,
+  //           biography: "",
+  //           roleId: 1,
+  //         };
+  //         await AddUser(newUser);
+  //         const newCurrUser = await getUserByEmail(auth.user.profile.email);
+  //         localStorage.setItem("currentUser", JSON.stringify(newCurrUser));
+  //       } else {
+  //         localStorage.setItem("currentUser", JSON.stringify(currUser));
+  //       }
+  //     }
+  //   }
+  // }
 
   return (
     <section className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white min-h-screen">
